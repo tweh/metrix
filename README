@@ -1,0 +1,53 @@
+
+
+                        M E T R I X
+
+
+                         Tobias Weh
+                      www.tobias-weh.de
+                    github.com/tweh/metrix
+
+          _   _    _   _ _    _  u u  _  u  u _
+          et quod temptabam scribere versus erat
+
+
+The metrix package can be used to print the prosodics/metrics
+of (latin) verses. It provides macros to typeset the symbols
+stand alone and in combination with syllables (including
+automatic alignment like seen above). Furthermore it defines a
+new brevis and a longa accent and a bow to contract syllables.
+
+
+# License
+This material is subject to the LaTeX Project Public License.
+See http://www.ctan.org/tex-archive/help/Catalogue/licenses.
+lppl.html for the details of that license.
+
+
+# Files
+
+- README         : this file
+- metrix.dtx     : source file
+- metrix.ins     : install file
+- metrix.pdf     : documentation
+
+
+# Installation
+It’s recommended to use your package manager to install the
+current version from CTAN. To install this package manually
+download alls files and then navigate to the folder that
+contains metrix.ins.
+Run
+
+    latex metrix.ins
+
+to get the file metrix.sty which should be moved somewhere
+TeX can find it (e.g. $TEXMFHOME/tex/latex/metrix/metrix.sty)
+
+To typeset the manual run
+
+     pdflatex metrix.dtx
+     makeindex -s gglo.ist -o metrix.gls metrix.glo
+     makeindex -s gind.ist -o metrix.ind metrix.idx
+     pdflatex metrix.dtx
+     pdflatex metrix.dtx
