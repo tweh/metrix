@@ -1,5 +1,5 @@
 CONTRIBUTION = metrix
-SUMMARY = A package to typeset metric/prosidic symbols standalone or above syllables.
+SUMMARY = A package to typeset metric/prosodic symbols standalone or above syllables.
 NAME = Tobias Weh
 EMAIL = mail@tweh.de
 DIRECTORY = /macros/latex/contrib/${CONTRIBUTION}
