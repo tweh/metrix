@@ -1,0 +1,188 @@
+% !TeX spellcheck = en_GB
+\documentclass[english]{article}
+\usepackage{babel}
+
+\usepackage[latin1]{inputenc}
+\setlength{\parskip}{\baselineskip}
+\setlength{\parindent}{0pt}
+
+\usepackage{metrix,booktabs,tabu,lipsum}
+
+\def\metrix{metrix}
+
+\makeatletter
+
+\newcommand{\meta}[1]{$\langle$#1$\rangle$}
+\newcommand{\cs}[1]{(#1)}
+\newcommand{\Arg}[1]{(#1)}
+
+\usepackage{shortvrb}
+%\MakeShortVerb{\+}
+
+
+\usepackage{pxfonts}
+
+\tikzset{
+ xbold highlight/.style={
+  every metrix symbol/.append style={line width=1mm,blue},
+ },
+}
+
+\newcommand{\testsymbols}{
+\begin{tabular}{cccccccccccc}
+\metricsymbols*{e} &
+\metricsymbols*{u} &
+\metricsymbols*{_} &
+\metricsymbols*{uu_} &
+\metricsymbols*{_uu} &
+\metricsymbols*{u_uu} &
+\metricsymbols*{x} &
+\metricsymbols*{n} &
+\metricsymbols*{u_} &
+\metricsymbols*{oo} &
+\metricsymbols*{|} &
+\metricsymbols*{||}
+\\
+\metricsymbols{e} &
+\metricsymbols{u} &
+\metricsymbols{_} &
+\metricsymbols{uu_} &
+\metricsymbols{_uu} &
+\metricsymbols{u_uu} &
+\metricsymbols{x} &
+\metricsymbols{n} &
+\metricsymbols{u_} &
+\metricsymbols{oo} &
+\metricsymbols{|} &
+\metricsymbols{||}
+\\
+\metricsymbols*[1=bold highlight]{e} &
+\metricsymbols*[1=bold highlight]{u} &
+\metricsymbols*[1=bold highlight]{_} &
+\metricsymbols*[1=bold highlight]{uu_} &
+\metricsymbols*[1=bold highlight]{_uu} &
+\metricsymbols*[1=bold highlight]{u_uu} &
+\metricsymbols*[1=bold highlight]{x} &
+\metricsymbols*[1=bold highlight]{n} &
+\metricsymbols*[1=bold highlight]{u_} &
+\metricsymbols*[1=bold highlight]{oo} &
+\metricsymbols*[1=bold highlight]{|} &
+\metricsymbols*[1=bold highlight]{||}
+\\
+\metricsymbols[1=bold highlight]{e} &
+\metricsymbols[1=bold highlight]{u} &
+\metricsymbols[1=bold highlight]{_} &
+\metricsymbols[1=bold highlight]{uu_} &
+\metricsymbols[1=bold highlight]{_uu} &
+\metricsymbols[1=bold highlight]{u_uu} &
+\metricsymbols[1=bold highlight]{x} &
+\metricsymbols[1=bold highlight]{n} &
+\metricsymbols[1=bold highlight]{u_} &
+\metricsymbols[1=bold highlight]{oo} &
+\metricsymbols[1=bold highlight]{|} &
+\metricsymbols[1=bold highlight]{||}
+\\
+\metricsymbols*[1=xbold highlight]{e} &
+\metricsymbols*[1=xbold highlight]{u} &
+\metricsymbols*[1=xbold highlight]{_} &
+\metricsymbols*[1=xbold highlight]{uu_} &
+\metricsymbols*[1=xbold highlight]{_uu} &
+\metricsymbols*[1=xbold highlight]{u_uu} &
+\metricsymbols*[1=xbold highlight]{x} &
+\metricsymbols*[1=xbold highlight]{n} &
+\metricsymbols*[1=xbold highlight]{u_} &
+\metricsymbols*[1=xbold highlight]{oo} &
+\metricsymbols*[1=xbold highlight]{|} &
+\metricsymbols*[1=xbold highlight]{||}
+%\\
+%\metricsymbols[1=xbold highlight]{e} &
+%\metricsymbols[1=xbold highlight]{u} &
+%\metricsymbols[1=xbold highlight]{_} &
+%\metricsymbols[1=xbold highlight]{uu_} &
+%\metricsymbols[1=xbold highlight]{_uu} &
+%\metricsymbols[1=xbold highlight]{u_uu} &
+%\metricsymbols[1=xbold highlight]{x} &
+%\metricsymbols[1=xbold highlight]{n} &
+%\metricsymbols[1=xbold highlight]{u_} &
+%\metricsymbols[1=xbold highlight]{oo} &
+%\metricsymbols[1=xbold highlight]{|} &
+%\metricsymbols[1=xbold highlight]{||}
+\end{tabular}
+}
+
+
+\ExplSyntaxOn
+\ExplSyntaxOff
+\begin{document}
+
+
+
+
+
+\metricsymbols[2={bold highlight,colored highlight=blue}]
+  {u_uu |}
+
+%\foreach \a in {a,e,i,o,u,ae,ei,eu,oe,au} {
+%	\brv{\a}\quad\lng{\a}\quad\acct{\a}
+%	\qquad\itshape
+%	\brv{\a}\quad\lng{\a}\quad\acct{\a}\\
+%	\upshape\sffamily
+%	\brv{\a}\quad\lng{\a}\quad\acct{\a}
+%	\qquad\itshape
+%	\brv{\a}\quad\lng{\a}\quad\acct{\a}
+%	\par
+%}
+%
+%\textit{\brv{i}} \brv{i}
+%
+%\bfseries\textit{\brv{i}} \brv{i}
+%
+
+% \subsection{How can I add a superscript letter to a certain symbol?}
+% Use the |superscript| highlighting style as described above.
+
+
+%\renewcommand{\hspace}[1]{%
+%	\rule{#1}{2pt}%
+%}
+%
+%\begin{metricverses}
+%	\itshape
+%	\metrics{_   _  _   _   _   _  _   _ _  _   _ _}
+%		     {ol-li re-spon-dit rex Al-ba-i Lon-ga-i}
+%	\verseref{Ennius Annalen 33 (Vahlen)}	
+%\end{metricverses}
+
+
+%\scriptsize
+%Scriptsize
+%
+%\testsymbols
+%
+%
+%\footnotesize
+%Footnotesize
+%
+%\testsymbols
+%
+%
+%\normalsize
+%Normalsize
+%
+%\testsymbols
+%
+%
+%\large
+%large
+%
+%\testsymbols
+%
+%
+%\Large
+%Large
+%
+%\testsymbols
+
+
+
+\end{document}
