@@ -37,7 +37,6 @@ lppl.html for the details of that license.
 - metrix.dtx     : source file
 - metrix.ins     : install file
 - metrix.pdf     : documentation
-- metrix.cwl     : autocompletition file for TeX studio
 
 
 # Installation
@@ -61,6 +60,7 @@ To typeset the manual run
      pdflatex metrix.dtx
      pdflatex metrix.dtx
 
-To install the CWL file copy it to ~/.config/texstudio on
-Linux and OS X and to c:\Documents and Settings/User/AppData/
-Roaming/texstudio. See section 1.5 of the TeXstudio manual.
+A CWL file for autocompletition in TeXstudio is avaiable in the
+GitHub repo. To install the CWL file copy it to ~/.config/texstudio/
+on Linux and OS X and to c:\Documents and Settings/User/AppData/
+Roaming/texstudio/. See section 1.5 of the TeXstudio manual.

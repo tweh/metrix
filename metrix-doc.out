@@ -1,0 +1,62 @@
+\BOOKMARK [1][-]{section.0.1}{1 Prerequisites}{}% 1
+\BOOKMARK [1][-]{section.0.2}{2 Package loading}{}% 2
+\BOOKMARK [1][-]{section.0.3}{3 Bugs and feedback}{}% 3
+\BOOKMARK [2][-]{subsection.0.3.1}{3.1 Known issues}{section.0.3}% 4
+\BOOKMARK [2][-]{subsection.0.3.2}{3.2 Feedback}{section.0.3}% 5
+\BOOKMARK [1][-]{section.0.4}{4 Metric symbols}{}% 6
+\BOOKMARK [2][-]{subsection.0.4.1}{4.1 Stand alone metric symbols}{section.0.4}% 7
+\BOOKMARK [2][-]{subsection.0.4.2}{4.2 Metric symbols above \(or below\) syllables}{section.0.4}% 8
+\BOOKMARK [2][-]{subsection.0.4.3}{4.3 Highlight certain symbols/syllabels}{section.0.4}% 9
+\BOOKMARK [1][-]{section.0.5}{5 Accents and bows}{}% 10
+\BOOKMARK [1][-]{section.0.6}{6 Environments}{}% 11
+\BOOKMARK [1][-]{section.0.7}{7 FAQs}{}% 12
+\BOOKMARK [2][-]{subsection.0.7.1}{7.1 How can I display the symbols below the syllables?}{section.0.7}% 13
+\BOOKMARK [2][-]{subsection.0.7.2}{7.2 How can I combine two words below one symbol?}{section.0.7}% 14
+\BOOKMARK [2][-]{subsection.0.7.3}{7.3 How can I show a hyphen character?}{section.0.7}% 15
+\BOOKMARK [2][-]{subsection.0.7.4}{7.4 How can I use quotes in \134metrics?}{section.0.7}% 16
+\BOOKMARK [2][-]{subsection.0.7.5}{7.5 How can I add a superscript letter to a certain symbol?}{section.0.7}% 17
+\BOOKMARK [2][-]{subsection.0.7.6}{7.6 How can I make subscripts instead of superscripts?}{section.0.7}% 18
+\BOOKMARK [2][-]{subsection.0.7.7}{7.7 How can I highlight all symbols/syllables?}{section.0.7}% 19
+\BOOKMARK [2][-]{subsection.0.7.8}{7.8 How can I change the size of a symbol?}{section.0.7}% 20
+\BOOKMARK [2][-]{subsection.0.7.9}{7.9 How can I stop highlighting the syllables too?}{section.0.7}% 21
+\BOOKMARK [2][-]{subsection.0.7.10}{7.10 Why got the highlight styles that long names?}{section.0.7}% 22
+\BOOKMARK [2][-]{subsection.0.7.11}{7.11 How can I change the font of all syllables?}{section.0.7}% 23
+\BOOKMARK [1][-]{section.0.8}{8 Customization}{}% 24
+\BOOKMARK [2][-]{subsection.0.8.1}{8.1 Variables}{section.0.8}% 25
+\BOOKMARK [2][-]{subsection.0.8.2}{8.2 TikZ styles}{section.0.8}% 26
+\BOOKMARK [1][-]{section.0.9}{9 Implementation}{}% 27
+\BOOKMARK [2][-]{subsection.0.9.1}{9.1 Required packages}{section.0.9}% 28
+\BOOKMARK [2][-]{subsection.0.9.2}{9.2 Variables}{section.0.9}% 29
+\BOOKMARK [2][-]{subsection.0.9.3}{9.3 Variants}{section.0.9}% 30
+\BOOKMARK [2][-]{subsection.0.9.4}{9.4 Internal main macros}{section.0.9}% 31
+\BOOKMARK [2][-]{subsection.0.9.5}{9.5 Internal auxiliary macros}{section.0.9}% 32
+\BOOKMARK [2][-]{subsection.0.9.6}{9.6 Patching font macros}{section.0.9}% 33
+\BOOKMARK [2][-]{subsection.0.9.7}{9.7 Internal macros for metric symbols}{section.0.9}% 34
+\BOOKMARK [2][-]{subsection.0.9.8}{9.8 User level macros}{section.0.9}% 35
+\BOOKMARK [2][-]{subsection.0.9.9}{9.9 TikZ styles}{section.0.9}% 36
+\BOOKMARK [2][-]{subsection.0.9.10}{9.10 Environments}{section.0.9}% 37
+\BOOKMARK [1][-]{glossary1.1}{Change History}{}% 38
+\BOOKMARK [1][-]{index2.1}{Index}{}% 39
+\BOOKMARK [2][-]{HD.Symbols.2}{Symbols}{index2.1}% 40
+\BOOKMARK [2][-]{HD.A.2}{A}{index2.1}% 41
+\BOOKMARK [2][-]{HD.B.2}{B}{index2.1}% 42
+\BOOKMARK [2][-]{HD.C.2}{C}{index2.1}% 43
+\BOOKMARK [2][-]{HD.D.2}{D}{index2.1}% 44
+\BOOKMARK [2][-]{HD.E.2}{E}{index2.1}% 45
+\BOOKMARK [2][-]{HD.F.2}{F}{index2.1}% 46
+\BOOKMARK [2][-]{HD.G.2}{G}{index2.1}% 47
+\BOOKMARK [2][-]{HD.H.2}{H}{index2.1}% 48
+\BOOKMARK [2][-]{HD.I.2}{I}{index2.1}% 49
+\BOOKMARK [2][-]{HD.L.2}{L}{index2.1}% 50
+\BOOKMARK [2][-]{HD.M.2}{M}{index2.1}% 51
+\BOOKMARK [2][-]{HD.N.2}{N}{index2.1}% 52
+\BOOKMARK [2][-]{HD.O.2}{O}{index2.1}% 53
+\BOOKMARK [2][-]{HD.P.2}{P}{index2.1}% 54
+\BOOKMARK [2][-]{HD.Q.2}{Q}{index2.1}% 55
+\BOOKMARK [2][-]{HD.R.2}{R}{index2.1}% 56
+\BOOKMARK [2][-]{HD.S.2}{S}{index2.1}% 57
+\BOOKMARK [2][-]{HD.T.2}{T}{index2.1}% 58
+\BOOKMARK [2][-]{HD.U.2}{U}{index2.1}% 59
+\BOOKMARK [2][-]{HD.V.2}{V}{index2.1}% 60
+\BOOKMARK [2][-]{HD.X.2}{X}{index2.1}% 61
+\BOOKMARK [2][-]{HD.Y.2}{Y}{index2.1}% 62

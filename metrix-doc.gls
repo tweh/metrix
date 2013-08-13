@@ -1,0 +1,11 @@
+
+ \begin{theglossary} 
+
+    \makeatletter\scan@allowedfalse
+
+  \item v1.0\efill 
+ \subitem General:\ Initial version\pfill \hdpindex{}{35}
+  \item v1.0a\efill 
+ \subitem General:\ Added \texttt  {cwl} file for TeXstudio\pfill \hdpindex{}{1}
+
+ \end{theglossary}
