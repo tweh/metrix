@@ -4,8 +4,17 @@
     \makeatletter\scan@allowedfalse
 
   \item v1.0\efill 
- \subitem General:\ Initial version\pfill \hdpindex{}{35}
+ \subitem General:\ Initial version\pfill \hdpindex{}{38}
   \item v1.0a\efill 
  \subitem General:\ Added \texttt  {cwl} file for TeXstudio\pfill \hdpindex{}{1}
+  \item v1.1\efill 
+ \subitem \verb*&\__metrix_l_break&:\ Made line slightly longer\pfill \hdpindex{}{32}
+    \subitem \verb*&\__metrix_ll_break&:\ Made lines slightly longer\pfill \hdpindex{}{32}
+    \subitem \verb*&\__metrix_metrics:nn&:\ Made short breaks available\pfill \hdpindex{}{21}
+    \subitem \verb*&\__metrix_print_syllable:n&:\ Symbol nodes get individual names now.\pfill \hdpindex{}{24}
+    \subitem \verb*&\__metrix_u__mark:&:\ Removed red dot.\pfill \hdpindex{}{30}
+    \subitem General:\ New section about breaks (see \ref  {sec:breaks})\pfill \hdpindex{}{4}
+      \subsubitem New section about the symbol syntax (see \ref  {sec:syntax})\pfill 
+		\hdpindex{}{2}
 
  \end{theglossary}

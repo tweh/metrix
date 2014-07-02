@@ -1,4 +1,4 @@
-This is makeindex, version 2.15 [TeX Live 2013] (kpathsea + Thai support).
+This is makeindex, version 2.15 [TeX Live 2014] (kpathsea + Thai support).
 Scanning style file /Users/Tobi/Library/texmf/makeindex/l3doc.ist..........
 ** Input style error (file = /Users/Tobi/Library/texmf/makeindex/l3doc.ist, line = 62):
    -- Unknown specifier lethead_prefix.
@@ -7,200 +7,203 @@ Scanning style file /Users/Tobi/Library/texmf/makeindex/l3doc.ist..........
 ** Input style error (file = /Users/Tobi/Library/texmf/makeindex/l3doc.ist, line = 64):
    -- Unknown specifier lethead_flag.
 ....done (14 attributes redefined, 3 ignored).
-Scanning input file metrix-doc.idx....done (796 entries accepted, 0 rejected).
-Sorting entries.........done (8371 comparisons).
+Scanning input file metrix-doc.idx....done (853 entries accepted, 0 rejected).
+Sorting entries.........done (8864 comparisons).
 Generating output file metrix-doc.ind....
-## Warning (input = metrix-doc.idx, line = 462; output = metrix-doc.ind, line = 6):
+## Warning (input = metrix-doc.idx, line = 514; output = metrix-doc.ind, line = 6):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 499; output = metrix-doc.ind, line = 8):
+## Warning (input = metrix-doc.idx, line = 551; output = metrix-doc.ind, line = 8):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 358; output = metrix-doc.ind, line = 12):
+## Warning (input = metrix-doc.idx, line = 410; output = metrix-doc.ind, line = 13):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 376; output = metrix-doc.ind, line = 15):
+## Warning (input = metrix-doc.idx, line = 428; output = metrix-doc.ind, line = 18):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 397; output = metrix-doc.ind, line = 24):
+## Warning (input = metrix-doc.idx, line = 449; output = metrix-doc.ind, line = 27):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 452; output = metrix-doc.ind, line = 26):
+## Warning (input = metrix-doc.idx, line = 504; output = metrix-doc.ind, line = 29):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 348; output = metrix-doc.ind, line = 29):
+## Warning (input = metrix-doc.idx, line = 400; output = metrix-doc.ind, line = 32):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 592; output = metrix-doc.ind, line = 38):
+## Warning (input = metrix-doc.idx, line = 643; output = metrix-doc.ind, line = 41):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 577; output = metrix-doc.ind, line = 42):
+## Warning (input = metrix-doc.idx, line = 628; output = metrix-doc.ind, line = 46):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 598; output = metrix-doc.ind, line = 45):
+## Warning (input = metrix-doc.idx, line = 649; output = metrix-doc.ind, line = 49):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 583; output = metrix-doc.ind, line = 49):
+## Warning (input = metrix-doc.idx, line = 634; output = metrix-doc.ind, line = 54):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 223; output = metrix-doc.ind, line = 51):
+## Warning (input = metrix-doc.idx, line = 226; output = metrix-doc.ind, line = 56):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 276; output = metrix-doc.ind, line = 54):
+## Warning (input = metrix-doc.idx, line = 314; output = metrix-doc.ind, line = 59):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 568; output = metrix-doc.ind, line = 56):
+## Warning (input = metrix-doc.idx, line = 619; output = metrix-doc.ind, line = 61):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 545; output = metrix-doc.ind, line = 58):
+## Warning (input = metrix-doc.idx, line = 597; output = metrix-doc.ind, line = 63):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 303; output = metrix-doc.ind, line = 63):
+## Warning (input = metrix-doc.idx, line = 349; output = metrix-doc.ind, line = 68):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 337; output = metrix-doc.ind, line = 65):
+## Warning (input = metrix-doc.idx, line = 389; output = metrix-doc.ind, line = 70):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 554; output = metrix-doc.ind, line = 69):
+## Warning (input = metrix-doc.idx, line = 679; output = metrix-doc.ind, line = 75):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 456; output = metrix-doc.ind, line = 71):
+## Warning (input = metrix-doc.idx, line = 606; output = metrix-doc.ind, line = 76):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 516; output = metrix-doc.ind, line = 73):
+## Warning (input = metrix-doc.idx, line = 508; output = metrix-doc.ind, line = 78):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 482; output = metrix-doc.ind, line = 75):
+## Warning (input = metrix-doc.idx, line = 568; output = metrix-doc.ind, line = 80):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 473; output = metrix-doc.ind, line = 77):
+## Warning (input = metrix-doc.idx, line = 534; output = metrix-doc.ind, line = 82):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 353; output = metrix-doc.ind, line = 80):
+## Warning (input = metrix-doc.idx, line = 525; output = metrix-doc.ind, line = 84):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 538; output = metrix-doc.ind, line = 83):
+## Warning (input = metrix-doc.idx, line = 405; output = metrix-doc.ind, line = 87):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 707; output = metrix-doc.ind, line = 125):
+## Warning (input = metrix-doc.idx, line = 590; output = metrix-doc.ind, line = 90):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 683; output = metrix-doc.ind, line = 129):
+## Warning (input = metrix-doc.idx, line = 764; output = metrix-doc.ind, line = 134):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 50; output = metrix-doc.ind, line = 231):
+## Warning (input = metrix-doc.idx, line = 740; output = metrix-doc.ind, line = 139):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 125; output = metrix-doc.ind, line = 234):
+## Warning (input = metrix-doc.idx, line = 50; output = metrix-doc.ind, line = 242):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 65; output = metrix-doc.ind, line = 237):
+## Warning (input = metrix-doc.idx, line = 125; output = metrix-doc.ind, line = 245):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 70; output = metrix-doc.ind, line = 240):
+## Warning (input = metrix-doc.idx, line = 65; output = metrix-doc.ind, line = 248):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 35; output = metrix-doc.ind, line = 243):
+## Warning (input = metrix-doc.idx, line = 70; output = metrix-doc.ind, line = 251):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 55; output = metrix-doc.ind, line = 249):
+## Warning (input = metrix-doc.idx, line = 45; output = metrix-doc.ind, line = 254):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 140; output = metrix-doc.ind, line = 252):
+## Warning (input = metrix-doc.idx, line = 55; output = metrix-doc.ind, line = 260):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 130; output = metrix-doc.ind, line = 255):
+## Warning (input = metrix-doc.idx, line = 140; output = metrix-doc.ind, line = 263):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 135; output = metrix-doc.ind, line = 258):
+## Warning (input = metrix-doc.idx, line = 130; output = metrix-doc.ind, line = 266):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 170; output = metrix-doc.ind, line = 261):
+## Warning (input = metrix-doc.idx, line = 135; output = metrix-doc.ind, line = 269):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 100; output = metrix-doc.ind, line = 264):
+## Warning (input = metrix-doc.idx, line = 170; output = metrix-doc.ind, line = 272):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 105; output = metrix-doc.ind, line = 267):
+## Warning (input = metrix-doc.idx, line = 100; output = metrix-doc.ind, line = 275):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 175; output = metrix-doc.ind, line = 270):
+## Warning (input = metrix-doc.idx, line = 105; output = metrix-doc.ind, line = 278):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 165; output = metrix-doc.ind, line = 273):
+## Warning (input = metrix-doc.idx, line = 175; output = metrix-doc.ind, line = 281):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 75; output = metrix-doc.ind, line = 276):
+## Warning (input = metrix-doc.idx, line = 165; output = metrix-doc.ind, line = 284):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 160; output = metrix-doc.ind, line = 279):
+## Warning (input = metrix-doc.idx, line = 75; output = metrix-doc.ind, line = 287):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 112; output = metrix-doc.ind, line = 282):
+## Warning (input = metrix-doc.idx, line = 160; output = metrix-doc.ind, line = 290):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 95; output = metrix-doc.ind, line = 286):
+## Warning (input = metrix-doc.idx, line = 112; output = metrix-doc.ind, line = 293):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 85; output = metrix-doc.ind, line = 289):
+## Warning (input = metrix-doc.idx, line = 95; output = metrix-doc.ind, line = 297):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 90; output = metrix-doc.ind, line = 292):
+## Warning (input = metrix-doc.idx, line = 85; output = metrix-doc.ind, line = 300):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 147; output = metrix-doc.ind, line = 298):
+## Warning (input = metrix-doc.idx, line = 90; output = metrix-doc.ind, line = 303):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 30; output = metrix-doc.ind, line = 301):
+## Warning (input = metrix-doc.idx, line = 147; output = metrix-doc.ind, line = 309):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 60; output = metrix-doc.ind, line = 304):
+## Warning (input = metrix-doc.idx, line = 40; output = metrix-doc.ind, line = 312):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 80; output = metrix-doc.ind, line = 307):
+## Warning (input = metrix-doc.idx, line = 60; output = metrix-doc.ind, line = 315):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 193; output = metrix-doc.ind, line = 350):
+## Warning (input = metrix-doc.idx, line = 80; output = metrix-doc.ind, line = 318):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 189; output = metrix-doc.ind, line = 354):
+## Warning (input = metrix-doc.idx, line = 196; output = metrix-doc.ind, line = 370):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 201; output = metrix-doc.ind, line = 366):
+## Warning (input = metrix-doc.idx, line = 192; output = metrix-doc.ind, line = 374):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 206; output = metrix-doc.ind, line = 376):
+## Warning (input = metrix-doc.idx, line = 204; output = metrix-doc.ind, line = 386):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 183; output = metrix-doc.ind, line = 383):
+## Warning (input = metrix-doc.idx, line = 209; output = metrix-doc.ind, line = 402):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 186; output = metrix-doc.ind, line = 387):
+## Warning (input = metrix-doc.idx, line = 183; output = metrix-doc.ind, line = 409):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 180; output = metrix-doc.ind, line = 392):
+## Warning (input = metrix-doc.idx, line = 186; output = metrix-doc.ind, line = 413):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 654; output = metrix-doc.ind, line = 396):
+## Warning (input = metrix-doc.idx, line = 180; output = metrix-doc.ind, line = 420):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 640; output = metrix-doc.ind, line = 403):
+## Warning (input = metrix-doc.idx, line = 711; output = metrix-doc.ind, line = 429):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 645; output = metrix-doc.ind, line = 405):
+## Warning (input = metrix-doc.idx, line = 697; output = metrix-doc.ind, line = 436):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 198; output = metrix-doc.ind, line = 471):
+## Warning (input = metrix-doc.idx, line = 702; output = metrix-doc.ind, line = 438):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 628; output = metrix-doc.ind, line = 507):
+## Warning (input = metrix-doc.idx, line = 201; output = metrix-doc.ind, line = 505):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 634; output = metrix-doc.ind, line = 597):
+## Warning (input = metrix-doc.idx, line = 685; output = metrix-doc.ind, line = 546):
    -- Conflicting entries: multiple encaps for the same page under same key.
 
-## Warning (input = metrix-doc.idx, line = 770; output = metrix-doc.ind, line = 618):
+## Warning (input = metrix-doc.idx, line = 691; output = metrix-doc.ind, line = 637):
    -- Conflicting entries: multiple encaps for the same page under same key.
-done (648 lines written, 64 warnings).
+
+## Warning (input = metrix-doc.idx, line = 827; output = metrix-doc.ind, line = 658):
+   -- Conflicting entries: multiple encaps for the same page under same key.
+done (688 lines written, 65 warnings).
 Output written in metrix-doc.ind.
 Transcript written in metrix-doc.ilg.

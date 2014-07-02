@@ -1,21 +1,14 @@
 
- 
-          M E T R I X
+
+                        M E T R I X
 
 
-
-          Tobias Weh
-          mail@tweh.de
-          www.tobias-weh.de
-                      
-          ctan.org/pkg/metrix
-          github.com/tweh/metrix
-
-
+                         Tobias Weh
+                      www.tobias-weh.de
+                    github.com/tweh/metrix
 
           _   _    _   _ _    _  u u  _  u  u _
           et quod temptabam scribere versus erat
-
 
 
 The metrix package can be used to print the prosodics/metrics
@@ -54,13 +47,7 @@ TeX can find it (e.g. $TEXMFHOME/tex/latex/metrix/metrix.sty)
 To typeset the manual run
 
      pdflatex metrix.dtx
-     pdflatex metrix.dtx
      makeindex -s gglo.ist -o metrix.gls metrix.glo
-     makeindex -s l3doc.ist -o metrix.ind metrix.idx
+     makeindex -s gind.ist -o metrix.ind metrix.idx
      pdflatex metrix.dtx
      pdflatex metrix.dtx
-
-A CWL file for autocompletition in TeXstudio is avaiable in the
-GitHub repo. To install the CWL file copy it to ~/.config/texstudio/
-on Linux and OS X and to c:\Documents and Settings/User/AppData/
-Roaming/texstudio/. See section 1.5 of the TeXstudio manual.

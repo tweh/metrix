@@ -1,2 +1,9 @@
 \glossaryentry{v1.0a> =General:>Added \texttt  {cwl} file for TeXstudio|hdpindex{}}{1}
-\glossaryentry{v1.0> =General:>Initial version|hdpindex{}}{35}
+\glossaryentry{v1.1> =General:>New section about the symbol syntax (see \ref  {sec:syntax})|hdpindex{}}{2}
+\glossaryentry{v1.1> =General:>New section about breaks (see \ref  {sec:breaks})|hdpindex{}}{4}
+\glossaryentry{v1.1>__metrix_metrics:nn=\verb!*&\__metrix_metrics:nn&:>Made short breaks available|hdpindex{}}{21}
+\glossaryentry{v1.1>__metrix_print_syllable:n=\verb!*&\__metrix_print_syllable:n&:>Symbol nodes get individual names now.|hdpindex{}}{24}
+\glossaryentry{v1.1>__metrix_u__mark:=\verb!*&\__metrix_u__mark:&:>Removed red dot.|hdpindex{}}{30}
+\glossaryentry{v1.1>__metrix_l_break=\verb!*&\__metrix_l_break&:>Made line slightly longer|hdpindex{}}{32}
+\glossaryentry{v1.1>__metrix_ll_break=\verb!*&\__metrix_ll_break&:>Made lines slightly longer|hdpindex{}}{32}
+\glossaryentry{v1.0> =General:>Initial version|hdpindex{}}{38}
