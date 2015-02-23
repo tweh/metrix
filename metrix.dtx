@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-%% File: metrix.dtx Copyright (C) 2014 Tobias Weh
+%% File: metrix.dtx Copyright (C) 2015 Tobias Weh
 %%
 %% It may be distributed and/or modified under the conditions of the
 %% LaTeX Project Public License (LPPL), either version 1.3c of this
@@ -27,7 +27,7 @@
 %<package>  }
 \def\metrixFileName{metrix}
 \def\metrixFileDescription{Typset prosody/metric symbols.}
-\def\metrixFileDate{2014/07/02}
+\def\metrixFileDate{2015/02/23}
 \def\metrixFileVersion{1.1}
 %</driver|package>
 %<*driver>
@@ -36,9 +36,10 @@
 \usepackage[latin1]{inputenc}
 \usepackage[T1]{fontenc}
 
+\usepackage{etoolbox}
+
 \usepackage{babel}
 
-\usepackage{xspace}
 \usepackage{xparse}
 \usepackage{xcolor}
  \definecolor{twred}{HTML}{91031F}
@@ -91,10 +92,10 @@
 }
 \AtBeginDocument{\renewcommand*{\glossaryname}{Change History}}
 
-\newcommand{\metrix}{\textcolor{twred}{\textbf{\textsf{m\u{e}trix}}}\xspace}
-\newcommand{\TikZ}{Ti\emph{k}Z\xspace}
-\newcommand{\Star}{\meta{\textup{\texttt{*}}}}
-\newcommand{\mail}[1]{\href{mailto:#1}{#1}}
+\def\metrix/{\textcolor{twred}{\textbf{\textsf{m\u{e}trix}}}}
+\def\TikZ/{Ti\emph{k}Z}
+\newrobustcmd{\Star}{\meta{\textup{\texttt{*}}}}
+\newrobustcmd{\mail}[1]{\href{mailto:#1}{#1}}
 
 
 \begin{document}
@@ -104,7 +105,7 @@
 % \fi
 %
 %
-% \title{The \metrix package}
+% \title{The \metrix/ package}
 %
 % \author{Tobias Weh\thanks{URL: \url{http://www.tweh.de}, Mail: \mail{mail@tweh.de}}}
 %
@@ -122,7 +123,7 @@
 %         {\acct{e}t qu\acct{o}d temp-t\acct{a}-bam | scr\acct{i}-be-re v\acct{e}r-sus \acct{e}-rat}
 % \end{center}
 % \par\bigskip
-% The \metrix package can be used to print the prosodics/metrics of (latin) verses.
+% The \metrix/ package can be used to print the prosodics/metrics of (latin) verses.
 % It provides macros to typeset the symbols stand alone and in combination with syllables
 % (including automatic alignment like seen above). Furthermore it defines a new br\brv{e}vis
 % and a l\lng{o}nga accent^^A
@@ -137,11 +138,11 @@
 % \end{abstract}
 %
 % \section{Prerequisites}
-% \metrix relies only on a few packages: \pkg{tikz} (including the +calc+ library), \pkg{xpatch}
+% \metrix/ relies only on a few packages: \pkg{tikz} (including the +calc+ library), \pkg{xpatch}
 % and \pkg{xparse}, which stand for the whole \LaTeX3 bundle.
 %
 % \section{Package loading}
-% Load \metrix as usual with +\usepackage{metrix}+. At the moment it has no options.
+% Load \metrix/ as usual with +\usepackage{metrix}+. At the moment it has no options.
 %
 % \changes{v1.0a}{2013/08/14}{Added \texttt{cwl} file for TeXstudio}
 % A CWL file +metrix.cwl+ for autocompletition in TeXstudio is available in the
@@ -159,7 +160,7 @@
 % \end{itemize}
 % I'm sure there are more bugs and issues let me know if you find them \dots
 % \subsection{Feedback}
-% Any feedback on \metrix is appreciated. You may use its GitHub repository at
+% Any feedback on \metrix/ is appreciated. You may use its GitHub repository at
 % \url{https://github.com/tweh/metrix} to request features and report bugs or
 % send me an e-mail (\mail{mail@tweh.de}).
 %
@@ -173,7 +174,7 @@
 % Before I'll show you the central macros for typesetting the symbols, you need
 % to ``learn'' the syntax for the symbols. All symbols are represented by a single
 % or a combination of characters. The list with all available abbreviations can
-% be found in table~\ref{tab:symbols}. Please keep in mind that \metrix uses spaces to
+% be found in table~\ref{tab:symbols}. Please keep in mind that \metrix/ uses spaces to
 % separate the abbreviations an something like +_'x+ will cause an error, the
 % correct input is +_ ' x+.
 % \begin{table}[htbp]
@@ -295,11 +296,11 @@
 % some options to highlight a certain symbol/syllable. The \meta{highlighting} list must
 % contain one or more comma separated pairs of \meta{numbers}+=+\meta{style}, where \meta{numbers}
 % is the number of a symbol/syllable (e.g. +3+) or a list of numbers separated by plus signs
-% (e.g. \verb.2+3+5.) in the list and \meta{style} is any \TikZ style (other \TikZ options may not 
+% (e.g. \verb.2+3+5.) in the list and \meta{style} is any \TikZ/ style (other \TikZ/ options may not 
 % work properly, so you maybe must create your own style, see section~\ref{faq:highlight}.)
 %
 % \medskip\noindent
-% \metrix comes with several predefined highlighting styles:
+% \metrix/ comes with several predefined highlighting styles:
 % \DeleteShortVerb{\+}
 % \begin{itemize}
 %    \item \textbf{\texttt{bold highlight}}\\[2ex]
@@ -421,7 +422,7 @@
 % \brv{a}m\acct{\lng{i}}c\brv{u}s pr\acct{\brv{o}}f\brv{u}g\brv{u}s
 % \end{example}
 %
-% \metrix also tries to do some kind of italic correction, and shifts the accents a little to the
+% \metrix/ also tries to do some kind of italic correction, and shifts the accents a little to the
 % right when an italic or slanted font is used.
 % \par\large\medskip
 % \brv{u}\enskip\textit{\brv{u}}\enskip\textsl{\brv{u}}\qquad
@@ -574,7 +575,7 @@
 % \end{example}
 % \subsection{How can I show a hyphen character?}\label{faq:hyphen}
 % To escape a hyphen +-+ put it inside braces, but you must still
-% add an unbraced hypen to show \metrix where your syllables split.
+% add an unbraced hypen to show \metrix/ where your syllables split.
 % \begin{example}
 % If you enclose the hyphen in braces together with a syllable, the symbol gets
 % centered above both.
@@ -598,21 +599,19 @@
 % It should be possible to use all shorthands (or direct input with Unicode) etc.
 % for quotation marks except the active
 % quotes of \pkg{csquotes}, which won't work inside the \cs{metrics} syllable list. It
-% is possible to use \pkg{csquotes} besides \metrix though.
+% is possible to use \pkg{csquotes} besides \metrix/ though.
 % \begin{example}
 % \begin{verbatim}
-% \metrics{ _   u }{ ``si me'' }
 % \metrics{ _   u }{ ``si me'' }
 % \metrics{ _   u }{ \glqq si me\grqq }% with \usepackage[<lang>]{babel}
 % \metrics{ _   u }{ "`si me"' }% with \usepackage[ngerman]{babel}
 % \end{verbatim}
 % \metrics{ _   u }{ ``si me'' }\quad
-% \metrics{ _   u }{ ``si me'' }\quad
 % \metrics{ _   u }{ \glqq si me\grqq }\quad
 % \metrics{ _   u }{ \glqq si me\grqq }
 % \end{example}
 % \subsection{How can I add a superscript letter to a certain symbol?}
-% Use the |superscript| highlighting style as described above.
+% Use the +superscript+ highlighting style as described above.
 % \subsection{How can I make subscripts instead of superscripts?}
 % The easiest way is to use the +superscript+ style and change a part of
 % its definition to shift the superscripts to subscript positions.
@@ -772,11 +771,11 @@
 %
 % \section{Customization}
 % Some hints were already given in the FAQ section (see section~\ref{sec:faq}) but here I will
-% list all variables and \TikZ styles that are in use and can be changed to customize
-% \metrix easily.
+% list all variables and \TikZ/ styles that are in use and can be changed to customize
+% \metrix/ easily.
 % \subsection{Variables}
 % \begin{function}{\setmetrixvar,\usemetrixvar}
-% To customize the rendering of the symbols, accents and bow \metrix has some variables
+% To customize the rendering of the symbols, accents and bow \metrix/ has some variables
 % that you can change.
 % \begin{syntax}
 %    \cs{setmetrixvar}\Arg{variable}\Arg{value}
@@ -871,29 +870,29 @@
 %       +emptywidth+ & +1em+ & gap replacing an empty symbol (abbreviation +e+) \\
 %    \end{longtabu}
 %
-% \subsection{\TikZ styles}\label{sec:styles}
-% Beside the variables you may change the \TikZ styles used by \metrix. But please mind
+% \subsection{\TikZ/ styles}\label{sec:styles}
+% Beside the variables you may change the \TikZ/ styles used by \metrix/. But please mind
 % that all styles are not empty by default so you should prefer +/.append style+ against
 % +/.style+. Otherwise it may cause strange effects. Remind that you can use \cs{usemetrixvar}
 % to access a variable.
-% \begin{variable}{every~metrix~symbol, every~metrix~big~symbol, every~metrix~symbol~node}
+% \begin{variable}{every metrix symbol, every metrix big symbol, every metrix symbol node}
 % These three styles define the apperance of the metric symbols. They define the line width,
 % the color, the basis vectors and other things.
 % \end{variable}
-% \begin{variable}{every~metrix~syllable~node,every~metrix~break~node}
+% \begin{variable}{every metrix syllable node,every metrix break node}
 % These styles defines the +node+s in which a syllable or a break symbol (the ones spanning across
 % the symbol and the syllable line) is typeset, e.g. it aligns these +node+s at their base line.
 % \end{variable}
-% \begin{variable}{every~metrix~accent}
+% \begin{variable}{every metrix accent}
 % This style defines the apperance of accents created by \cs{lng} and \cs{brv}.
 % \end{variable}
-% \begin{variable}{every~metrix~bow}
+% \begin{variable}{every metrix bow}
 % This style defines the apperance of bows below symbols.
 % \end{variable}
-% \begin{variable}{bold~highlight,colored~highlight,dashed~highlight,filled~highlight,superscript}
+% \begin{variable}{bold highlight,colored highlight,dashed highlight,filled highlight,superscript}
 % These styles can be used to highlight a certain symbol.
 % \end{variable}
-% \begin{variable}{every~superscript~picture,every~superscript~node,every~superscript~label}
+% \begin{variable}{every superscript picture,every superscript node,every superscript label}
 % These styles are used to define the +superscript+ highlighting style.
 % \end{variable}
 %
@@ -1989,8 +1988,8 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \subsection{\TikZ styles}
-% The \metrix package uses several \TikZ sytles to draw the macros.
+% \subsection{\TikZ/ styles}
+% The \metrix/ package uses several \TikZ/ sytles to draw the macros.
 %    \begin{macrocode}
 \ExplSyntaxOff
 \tikzset {
