@@ -20,7 +20,7 @@
 %% original source files, as listed above, are part of the
 %% same distribution. (The sources need not necessarily be
 %% in the same archive or directory.)
-%% File: metrix.dtx Copyright (C) 2013 Tobias Weh
+%% File: metrix.dtx Copyright (C) 2015 Tobias Weh
 %%
 %% It may be distributed and/or modified under the conditions of the
 %% LaTeX Project Public License (LPPL), either version 1.3c of this
@@ -44,8 +44,8 @@
   }
 \def\metrixFileName{metrix}
 \def\metrixFileDescription{Typset prosody/metric symbols.}
-\def\metrixFileDate{2013/08/14}
-\def\metrixFileVersion{1.0a}
+\def\metrixFileDate{2015/02/23}
+\def\metrixFileVersion{1.1}
 \ProvidesExplPackage
   {\metrixFileName}{\metrixFileDate}{\metrixFileVersion}{\metrixFileDescription}
 \RequirePackage{xparse}
@@ -113,6 +113,7 @@
 \tl_new:N \l__metrix_words_tl
 \seq_new:N \l__metrix_syllables_seq
 \seq_new:N \l__metrix_symbols_seq
+\seq_new:N \l__metrix_short_breaks_seq
 \prop_new:N \l__metrix_highlights_prop
 \seq_new:N \l__metrix_highlight_seq
 \seq_new:N \l__metrix_highlight_pos_seq
@@ -132,6 +133,16 @@
   \tl_replace_all:Nnn \l__metrix_words_tl { ~ } { - \q__metrix_space_marker - }
   \seq_set_split:NnV \l__metrix_syllables_seq { - } \l__metrix_words_tl
   \seq_set_split:Nnx \l__metrix_symbols_seq { ~ } { \tl_trim_spaces:n { #1 } }
+  \int_zero:N \l__metrix_process_int
+  \seq_clear:N \l__metrix_short_breaks_seq
+  \seq_map_inline:Nn \l__metrix_symbols_seq {
+    \int_incr:N \l__metrix_process_int
+    \tl_if_eq:nnT { ##1 } { ' } {
+    \seq_put_right:Nx \l__metrix_short_breaks_seq { \int_use:N \l__metrix_process_int }
+    \int_decr:N \l__metrix_process_int
+  }
+  \seq_remove_all:Nn \l__metrix_symbols_seq { ' }
+}
   \int_zero:N \l__metrix_process_int
   \seq_map_inline:Nn \l__metrix_syllables_seq
    {
@@ -170,6 +181,25 @@
          }
        }
      }
+     \seq_if_empty:NF \l__metrix_short_breaks_seq {
+       \seq_map_inline:Nn \l__metrix_short_breaks_seq {
+         \int_set:Nn \l_tmpa_int { ##1 - 1 }
+         \bool_if:nF {
+           \int_compare_p:n
+             { 0 = \l_tmpa_int }
+           ||
+           \int_compare_p:n
+             { \seq_count:N \l__metrix_symbols_seq = \l_tmpa_int }
+         } {
+           \tikz [remember~picture, overlay] {
+             \node [every~metrix~symbol~node] at
+               ($(l__metrix_symbol_node_\int_use:N \l_tmpa_int.east)!
+                0.5!(l__metrix_symbol_node_##1.west)$)
+               { \__metrix_short_break: };
+           }
+         }
+       }
+     }
    }
    {
     \__metrix_error_msg:n
@@ -196,10 +226,22 @@
      }
     \str_case:nnn { ##1 }
      {
-      { |  }
+      { ' }
        {
         \__metrix_break_gap:
         \__metrix_align_symbol:n { \__metrix_l_bigmark:  }
+        \__metrix_break_gap:
+       }
+      { | }
+       {
+        \__metrix_break_gap:
+        \__metrix_align_symbol:n { \__metrix_l_bigmark:  }
+        \__metrix_break_gap:
+       }
+      { '' }
+       {
+        \__metrix_break_gap:
+        \__metrix_align_symbol:n { \__metrix_ll_bigmark: }
         \__metrix_break_gap:
        }
       { || }
@@ -218,23 +260,27 @@
  {
   \group_begin:
    \hbox_set:Nn \l__metrix_syllable_box { #1 }
-   \dim_compare:nTF { \box_wd:N \l__metrix_syllable_box < \g__metrix_variable_shortsyllablelimit_tl }
+   \dim_compare:nTF
+      { \box_wd:N \l__metrix_syllable_box < \g__metrix_variable_shortsyllablelimit_tl }
       { \bool_set_true:N \l__metrix_short_syllable_bool }
       { \bool_set_false:N \l__metrix_short_syllable_bool }
    \cs_set:Npx \__metrix_current_highlight: {
     \prop_get:NV \l__metrix_highlights_prop \l__metrix_process_int
    }
    \expandafter\tikzset\expandafter{\__metrix_current_highlight:}
+   \hbox_set:Nn \l_tmpa_box { \__metrix_print_symbol: }
    \begin{tikzpicture}
     [
+     remember~picture,
      baseline=(l__metrix_syllable_node.base),
     ]
     \node [every~metrix~syllable~node] (l__metrix_syllable_node) {#1};
     \begin{pgfinterruptboundingbox}
      \node [every~metrix~symbol~node]
+      (l__metrix_symbol_node_\int_use:N \l__metrix_process_int)
       at ($(l__metrix_syllable_node.base)+(0,\usemetrixvar{symbolshift})
       +(\tl_use:N \l__metrix_internal_itcorrection_tl,0)$)
-      { \__metrix_print_symbol: };
+      { \box_use:N \l_tmpa_box };
     \end{pgfinterruptboundingbox}
    \end{tikzpicture}
   \group_end:
@@ -450,7 +496,6 @@
    \draw ($(0,-0.2)+(-0.5\pgflinewidth,-\pgflinewidth)-(0,\usemetrixvar{gap})$) --
     ($(0.4,-0.2)+(0.5\pgflinewidth,-\pgflinewidth)
     +(0,-\usemetrixvar{gap})$);
-   \fill [red] circle (0.2pt);
   \end{tikzpicture}
  }
 \cs_new:Npn \__metrix_n_mark:
@@ -490,22 +535,27 @@
 \cs_new:Npn \__metrix_l_break:
  {
   \begin{tikzpicture}[every~metrix~symbol,baseline=0.05em]
-   \draw [shorten~<=-0.2em] (0,\usemetrixvar{symbolshift})
-    -- (0,0) -- (0,0.8em) -- (0,\usemetrixvar{symbolshift});
+   \draw (0,\usemetrixvar{symbolshift}+0.325em)
+    -- (0,-0.05em) -- (0,0.8em) -- (0,\usemetrixvar{symbolshift});
   \end{tikzpicture}
  }
 \cs_new:Npn \__metrix_ll_break:
  {
   \begin{tikzpicture}[every~metrix~symbol,baseline=0.05em]
-   \draw [shorten~<=-0.2em] (0,\usemetrixvar{symbolshift})
-    -- (0,0) -- (0,0.8em) -- (0,\usemetrixvar{symbolshift});
+   \draw (0,\usemetrixvar{symbolshift}+0.325em)
+    -- (0,-0.05em) -- (0,0.8em) -- (0,\usemetrixvar{symbolshift});
    \draw
     [
      shift={($(\pgflinewidth,0)+(1.5*\usemetrixvar{gap},0)$)},
-     shorten~<=-0.2em,
     ]
-    (0,\usemetrixvar{symbolshift}) -- (0,0) -- (0,0.8em)
+    (0,\usemetrixvar{symbolshift}+0.325em) -- (0,-0.05em) -- (0,0.8em)
     -- (0,\usemetrixvar{symbolshift});
+  \end{tikzpicture}
+ }
+\cs_new:Npn \__metrix_short_break:
+ {
+  \begin{tikzpicture}[every~metrix~symbol]
+   \draw (0,0.3) -- (0,-0.3);
   \end{tikzpicture}
  }
 \NewDocumentCommand{ \setmetrixvar }{ m m }

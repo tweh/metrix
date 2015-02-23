@@ -1,24 +1,46 @@
+# variables
+## package base name
 CONTRIBUTION = metrix
-SUMMARY = A package to typeset metric/prosodic symbols standalone or above syllables.
-NAME = Tobias Weh
-EMAIL = mail@tweh.de
-DIRECTORY = /macros/latex/contrib/${CONTRIBUTION}
-LICENSE = free
-FREEVERSION = lppl
-FILE = ${CONTRIBUTION}.tar.gz
+## package list
+PACKAGES = ${CONTRIBUTION}.sty
+## TDS-ZIP file name
+FILE = ${CONTRIBUTION}.tds.zip
+## final ZIP file name
+ZIP = metrix
+## cleanup command
+CLEANUP = find -E . -type f -regex "\./metrix(.?|-doc)\.(aux|glo|gls|hd|idx|ilg|ind|lof|log|lot|out|pdf|toc)" -delete
 
-export CONTRIBUTION VERSION NAME EMAIL SUMMARY DIRECTORY LICENSE FREEVERSION FILE
-
-ctanify: ${FILE}
-
-${CONTRIBUTION}.pdf:
-	mv ${CONTRIBUTION}-doc.pdf ${CONTRIBUTION}.pdf
-
-${CONTRIBUTION}.sty: ${CONTRIBUTION}.ins ${CONTRIBUTION}.dtx
-	yes | tex $<
+# generate TDS-ZIP
+${FILE}: ${CONTRIBUTION}.dtx ${CONTRIBUTION}.ins ${PACKAGES} README ${CONTRIBUTION}.pdf
+	# source files
+	mkdir -p ${CONTRIBUTION}/source/latex/${CONTRIBUTION}/
+	cp ${CONTRIBUTION}.dtx ${CONTRIBUTION}/source/latex/${CONTRIBUTION}/${CONTRIBUTION}.dtx
+	cp ${CONTRIBUTION}.ins ${CONTRIBUTION}/source/latex/${CONTRIBUTION}/${CONTRIBUTION}.ins
+	# sty/cls files
+	mkdir -p ${CONTRIBUTION}/tex/latex/${CONTRIBUTION}/
+	for p in $(PACKAGES); do cp $$p ${CONTRIBUTION}/tex/latex/${CONTRIBUTION}/$$p; done
+	# documentation
+	mkdir -p ${CONTRIBUTION}/doc/latex/${CONTRIBUTION}/
+	cp ${CONTRIBUTION}.pdf ${CONTRIBUTION}/doc/latex/${CONTRIBUTION}/${CONTRIBUTION}.pdf
+	cp README ${CONTRIBUTION}/doc/latex/${CONTRIBUTION}/README
+	# zip folder
+	cd ${CONTRIBUTION} ; zip -r ../${FILE} * -x "*.DS_Store"
+	# tidy up
+	$(CLEANUP)
+	rm -rf ${CONTRIBUTION}
 	
-${FILE}: ${CONTRIBUTION}.dtx ${CONTRIBUTION}.ins ${CONTRIBUTION}.sty README ${CONTRIBUTION}.pdf
-	ctanify $^
+# generate *.sty files
+%.sty: ${CONTRIBUTION}.ins ${CONTRIBUTION}.dtx
+	latex $<
 
-upload: ctanify
-	ctanupload -p
+# generate documentation file
+${CONTRIBUTION}.pdf: ${CONTRIBUTION}.dtx
+	# tidy up
+	$(CLEANUP)
+	# generate doc
+	pdflatex ${CONTRIBUTION}.dtx 
+	pdflatex ${CONTRIBUTION}.dtx
+	makeindex -s gglo.ist -o ${CONTRIBUTION}.gls ${CONTRIBUTION}.glo
+	makeindex -s l3doc.ist -o ${CONTRIBUTION}.ind ${CONTRIBUTION}.idx
+	pdflatex ${CONTRIBUTION}.dtx
+	pdflatex ${CONTRIBUTION}.dtx

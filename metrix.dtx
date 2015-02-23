@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-%% File: metrix.dtx Copyright (C) 2013 Tobias Weh
+%% File: metrix.dtx Copyright (C) 2015 Tobias Weh
 %%
 %% It may be distributed and/or modified under the conditions of the
 %% LaTeX Project Public License (LPPL), either version 1.3c of this
@@ -27,8 +27,8 @@
 %<package>  }
 \def\metrixFileName{metrix}
 \def\metrixFileDescription{Typset prosody/metric symbols.}
-\def\metrixFileDate{2013/08/14}
-\def\metrixFileVersion{1.0a}
+\def\metrixFileDate{2015/02/23}
+\def\metrixFileVersion{1.1}
 %</driver|package>
 %<*driver>
 \documentclass[full,english]{l3doc}
@@ -36,16 +36,21 @@
 \usepackage[latin1]{inputenc}
 \usepackage[T1]{fontenc}
 
+\usepackage{etoolbox}
+
 \usepackage{babel}
 
-\usepackage{xspace}
 \usepackage{xparse}
 \usepackage{xcolor}
  \definecolor{twred}{HTML}{91031F}
 
+\hypersetup{
+	allcolors=twred,
+}
+
 \usepackage{metrix}
 
-\usepackage{tabu,booktabs}
+\usepackage{longtable,tabu,booktabs}
 \renewcommand{\arraystretch}{1.3}
 \usepackage[bottom]{footmisc}
 
@@ -72,6 +77,7 @@
 	\MakeShortVerb{\+}
 }
 
+
 \IndexPrologue{
 	\section*{Index}
 	\addcontentsline{toc}{section}{Index}
@@ -81,17 +87,15 @@
 	all others indicate the places where it is used.
 }
 \GlossaryPrologue{
-	\section*{Change History}
-	\addcontentsline{toc}{section}{Change~History}
-	\markboth{{Change History}}{{Change History}}
+	\section{Change History}
 	{\GlossaryParms\ttfamily\hyphenchar\font=`\-}
 }
 \AtBeginDocument{\renewcommand*{\glossaryname}{Change History}}
 
-\newcommand{\metrix}{\textcolor{twred}{\textbf{\textsf{m\u{e}trix}}}\xspace}
-\newcommand{\TikZ}{Ti\emph{k}Z\xspace}
-\newcommand{\Star}{\meta{\textup{\texttt{*}}}}
-\newcommand{\mail}[1]{\href{mailto:#1}{#1}}
+\def\metrix/{\textcolor{twred}{\textbf{\textsf{m\u{e}trix}}}}
+\def\TikZ/{Ti\emph{k}Z}
+\newrobustcmd{\Star}{\meta{\textup{\texttt{*}}}}
+\newrobustcmd{\mail}[1]{\href{mailto:#1}{#1}}
 
 
 \begin{document}
@@ -101,7 +105,7 @@
 % \fi
 %
 %
-% \title{The \metrix package}
+% \title{The \metrix/ package}
 %
 % \author{Tobias Weh\thanks{URL: \url{http://www.tweh.de}, Mail: \mail{mail@tweh.de}}}
 %
@@ -119,7 +123,7 @@
 %         {\acct{e}t qu\acct{o}d temp-t\acct{a}-bam | scr\acct{i}-be-re v\acct{e}r-sus \acct{e}-rat}
 % \end{center}
 % \par\bigskip
-% The \metrix package can be used to print the prosodics/metrics of (latin) verses.
+% The \metrix/ package can be used to print the prosodics/metrics of (latin) verses.
 % It provides macros to typeset the symbols stand alone and in combination with syllables
 % (including automatic alignment like seen above). Furthermore it defines a new br\brv{e}vis
 % and a l\lng{o}nga accent^^A
@@ -134,16 +138,16 @@
 % \end{abstract}
 %
 % \section{Prerequisites}
-% \metrix relies only on a few packages: \pkg{tikz} (including the +calc+ library), \pkg{xpatch}
+% \metrix/ relies only on a few packages: \pkg{tikz} (including the +calc+ library), \pkg{xpatch}
 % and \pkg{xparse}, which stand for the whole \LaTeX3 bundle.
 %
 % \section{Package loading}
-% Load \metrix as usual with +\usepackage{metrix}+. At the moment it has no options.
+% Load \metrix/ as usual with +\usepackage{metrix}+. At the moment it has no options.
 %
 % \changes{v1.0a}{2013/08/14}{Added \texttt{cwl} file for TeXstudio}
 % A CWL file +metrix.cwl+ for autocompletition in TeXstudio is available in the
 % GitHub repo. To install the CWL file copy it to +~/.config/texstudio/+
-% on Linux and OS X and to +c:\Documents and Settings/User/AppData/Roaming/texstudio/+.
+% on Linux and OS X and to +C:\Documents and Settings/User/AppData/Roaming/texstudio/+.
 % See section 1.5 of the TeXstudio manual for more information.
 %
 %
@@ -156,12 +160,47 @@
 % \end{itemize}
 % I'm sure there are more bugs and issues let me know if you find them \dots
 % \subsection{Feedback}
-% Any feedback on \metrix is appreciated. You may use its GitHub repository at
-% \url{https://github.com/tweh/metrix} to request features or report bugs or
+% Any feedback on \metrix/ is appreciated. You may use its GitHub repository at
+% \url{https://github.com/tweh/metrix} to request features and report bugs or
 % send me an e-mail (\mail{mail@tweh.de}).
 %
+% Please note that I don?t speak latin myself and fo that the examples in this manual
+% may be wrong---as long as they show how to use the package I don't consider such
+% errors as bugs +;-)+.
 %
 % \section{Metric symbols}
+% \subsection{Syntax for symbols}\label{sec:syntax}
+% \changes{v1.1}{2014/07/02}{New section about the symbol syntax (see \ref{sec:syntax})}
+% Before I'll show you the central macros for typesetting the symbols, you need
+% to ``learn'' the syntax for the symbols. All symbols are represented by a single
+% or a combination of characters. The list with all available abbreviations can
+% be found in table~\ref{tab:symbols}. Please keep in mind that \metrix/ uses spaces to
+% separate the abbreviations an something like +_'x+ will cause an error, the
+% correct input is +_ ' x+.
+% \begin{table}[htbp]
+%    \caption{Symbol abbreviations}\label{tab:symbols}
+%    \centering
+%    \begin{tabu} {l>{\itshape}lcl}
+%       \toprule
+%       \rowfont{\bfseries\sffamily} \multicolumn{2}{l}{abbreviation} & symbol & explantion \\
+%       \midrule
+%       +e+ && \metricsymbols{e} & empty (=\,invisible) symbol \\
+%       +u+ && \metricsymbols{u} & elementum breve \\
+%       +_+ & under score & \metricsymbols{_} & elementum longum \\
+%       +uu+ && \metricsymbols{uu} & double breve \\
+%       +uu_+ && \metricsymbols{uu_} & elementum biceps \\
+%       +_uu+ && \metricsymbols{_uu} & elementum biceps \\
+%       +u_uu+ && \metricsymbols{u_uu} & elementum anceps \\
+%       +x+ && \metricsymbols{x} & elementum anceps \\
+%       +n+ && \metricsymbols{n} & elementum indifferens \\
+%       +u_+ && \metricsymbols{u_} & elementum indifferens \\
+%       +oo+ & two lowercase o's & \metricsymbols{oo} & aeolic base \\
+%       +|+ & pipe & \metricsymbols{|} & break (see \ref{sec:breaks}) \\
+%       +||+ & two pipes & \metricsymbols{||} & verse break (see \ref{sec:breaks}) \\
+%       +'+ & apostrophe & \metricsymbols{'} & shorter break (see \ref{sec:breaks}) \\
+%       \bottomrule
+%    \end{tabu}
+%   \end{table}
 % \subsection{Stand alone metric symbols}
 % \begin{function}[EXP]{\metricsymbols}
 %   \begin{syntax}
@@ -170,12 +209,9 @@
 %   This macro typesets stand alone versions of the symbols, i.e. without
 %   syllables below (or above) of them. Use the starred version for smaller (in line) symbols
 %   and the normal version for bigger symbols. \meta{symbols} must be a list of
-%   abbreviations as listed in table~\ref{tab:symbols};\footnotemark
-%   the single abbreviations must be
-%   separated by one (or more spaces).
+%   abbreviations as explained in section~\ref{sec:syntax}; the abbreviations must be
+%   separated by one (or more) spaces.
 % \end{function}
-%      \footnotetext{The break symbols cannot be used above syllables, they must be used together with
-%      break symbols in the syllable list, only!}
 % \begin{example}
 % The \emph{diphilius} can be shown with this code.
 %   \begin{verbatim}
@@ -189,8 +225,8 @@
 %      \cs{metrics}\oarg{highlighting}\Arg{symbols}\Arg{syllables}
 %   \end{syntax}
 %   This command can be used to align the symbols above (or below)
-%   syllables. The first \meta{symbols} argument works as before. 
-%   The second argument \meta{syllables} takes the hyphenated verse.
+%   syllables. The first argument works as in \cs{metricsymbols},
+%   the second argument \meta{syllables} takes the hyphenated verse.
 % \end{function}
 % \begin{example}
 %   \begin{verbatim}
@@ -223,39 +259,48 @@
 %   \end{verbatim}
 %   The \metricsymbols*{_uu} shows an \emph{elementum biceps}.
 % \end{example}
-% \begin{table}[hbtp]
-%    \centering
-%    \begin{tabu} {l>{\itshape}lcl}
-%       \toprule
-%       \rowfont{\bfseries\sffamily} \multicolumn{2}{l}{abbreviation} & symbol & explantion \\
-%       \midrule
-%       +e+ && \metricsymbols{e} & empty symbol \\
-%       +u+ && \metricsymbols{u} & elementum breve \\
-%       +_+ & (under score) & \metricsymbols{_} & elementum longum \\
-%       +uu+ && \metricsymbols{uu} & double breve \\
-%       +uu_+ && \metricsymbols{uu_} & elementum biceps \\
-%       +_uu+ && \metricsymbols{_uu} & elementum biceps \\
-%       +u_uu+ && \metricsymbols{u_uu} & elementum anceps \\
-%       +x+ && \metricsymbols{x} & elementum anceps \\
-%       +n+ && \metricsymbols{n} & elementum indifferens \\
-%       +u_+ && \metricsymbols{u_} & elementum indifferens \\
-%       +oo+ & (two lowercase o's) & \metricsymbols{oo} & aeolic base \\
-%       +|+ & (pipe) & \metricsymbols{|} & break \\
-%       +||+ & (two pipes) & \metricsymbols{||} & verse break \\
-%       \bottomrule
-%    \end{tabu}
-%    \caption{Symbol abbreviations}\label{tab:symbols}
-%   \end{table}
+% 
+% \subsection{Adding symbols for breaks}\label{sec:breaks}
+% \changes{v1.1}{2014/07/02}{New section about breaks (see \ref{sec:breaks})}
+% As seen in the examples above you can use pipes, i.e. +|+ or +||+, to mark breaks.
+% In \cs{metrics} the markers must appear in \meta{symbols} and \meta{syllables}.
+% \begin{example}
+%   \begin{verbatim}
+% \metrics{_    u  u  _   _  _  | _    _  u  u   _  ||}
+%         {flos ve-te-ris vi-ni | meis na-ri-bus ob ||}
+%   \end{verbatim}
+% \metrics{_    u  u  _   _  _  | _    _  u  u   _  ||}
+%         {flos ve-te-ris vi-ni | meis na-ri-bus ob ||}
+% \end{example}
+% If you want the breaks to be shown in the symbol line only you can use the
+% shorter break which is represented by an apostrophe, i.e. +'+.
+% This mark must be used in \meta{symbols} only and is kind of special:
+% \begin{itemize}
+%    \item It \emph{can't} be highlighted and thus doesn't count for the numbers used
+%       for highlights,
+%    \item it is ignored at the beginning and the end of \meta{symbols},
+%    \item in \cs{metricsymbols} it is treated like the pipe, and
+%    \item \TeX\ needs at least one additional run to get the right positions.
+% \end{itemize}
+% \begin{example}
+%   \begin{verbatim}
+% \metrics{_  u  u ' _  u   u ' _  _ ' _  _   |  _  u   u  |  _ _   ||}
+%         {Ar-ma vi-rum-que ca-no Tro-iae qui | pri-mus ab |  o-ris ||}
+%   \end{verbatim}
+% \metrics{_  u  u ' _  u   u ' _  _ ' _  _   |  _  u   u  |  _ _   ||}
+%         {Ar-ma vi-rum-que ca-no Tro-iae qui | pri-mus ab |  o-ris ||}
+% \end{example}
+% 
 % \subsection{Highlight certain symbols/syllabels}
 % As you can see above \cs{metrics} and \cs{metricsymbols} got an optional argument taking
 % some options to highlight a certain symbol/syllable. The \meta{highlighting} list must
 % contain one or more comma separated pairs of \meta{numbers}+=+\meta{style}, where \meta{numbers}
 % is the number of a symbol/syllable (e.g. +3+) or a list of numbers separated by plus signs
-% (e.g. \verb.2+3+5.) in the list and \meta{style} is any \TikZ style (other \TikZ options may not 
+% (e.g. \verb.2+3+5.) in the list and \meta{style} is any \TikZ/ style (other \TikZ/ options may not 
 % work properly, so you maybe must create your own style, see section~\ref{faq:highlight}.)
 %
 % \medskip\noindent
-% \metrix comes with several predefined highlighting styles:
+% \metrix/ comes with several predefined highlighting styles:
 % \DeleteShortVerb{\+}
 % \begin{itemize}
 %    \item \textbf{\texttt{bold highlight}}\\[2ex]
@@ -377,7 +422,7 @@
 % \brv{a}m\acct{\lng{i}}c\brv{u}s pr\acct{\brv{o}}f\brv{u}g\brv{u}s
 % \end{example}
 %
-% \metrix also tries to do some kind of italic correction, and shifts the accents a little to the
+% \metrix/ also tries to do some kind of italic correction, and shifts the accents a little to the
 % right when an italic or slanted font is used.
 % \par\large\medskip
 % \brv{u}\enskip\textit{\brv{u}}\enskip\textsl{\brv{u}}\qquad
@@ -530,7 +575,7 @@
 % \end{example}
 % \subsection{How can I show a hyphen character?}\label{faq:hyphen}
 % To escape a hyphen +-+ put it inside braces, but you must still
-% add an unbraced hypen to show \metrix where your syllables split.
+% add an unbraced hypen to show \metrix/ where your syllables split.
 % \begin{example}
 % If you enclose the hyphen in braces together with a syllable, the symbol gets
 % centered above both.
@@ -554,21 +599,19 @@
 % It should be possible to use all shorthands (or direct input with Unicode) etc.
 % for quotation marks except the active
 % quotes of \pkg{csquotes}, which won't work inside the \cs{metrics} syllable list. It
-% is possible to use \pkg{csquotes} besides \metrix though.
+% is possible to use \pkg{csquotes} besides \metrix/ though.
 % \begin{example}
 % \begin{verbatim}
-% \metrics{ _   u }{ ``si me'' }
 % \metrics{ _   u }{ ``si me'' }
 % \metrics{ _   u }{ \glqq si me\grqq }% with \usepackage[<lang>]{babel}
 % \metrics{ _   u }{ "`si me"' }% with \usepackage[ngerman]{babel}
 % \end{verbatim}
 % \metrics{ _   u }{ ``si me'' }\quad
-% \metrics{ _   u }{ ``si me'' }\quad
 % \metrics{ _   u }{ \glqq si me\grqq }\quad
 % \metrics{ _   u }{ \glqq si me\grqq }
 % \end{example}
 % \subsection{How can I add a superscript letter to a certain symbol?}
-% Use the |superscript| highlighting style as described above.
+% Use the +superscript+ highlighting style as described above.
 % \subsection{How can I make subscripts instead of superscripts?}
 % The easiest way is to use the +superscript+ style and change a part of
 % its definition to shift the superscripts to subscript positions.
@@ -630,7 +673,7 @@
 % Leave out the grouping (and put this to your preamble) if yout want to highlight
 % the symbols in your whole document.
 % \subsection{How can I change the size of a symbol?}
-% Change the two base vector units.
+% Change the two base vector units.\pagebreak
 % \begin{example}
 % \begin{verbatim}
 % \setmetrixvar{baseunit}{1em}
@@ -728,11 +771,11 @@
 %
 % \section{Customization}
 % Some hints were already given in the FAQ section (see section~\ref{sec:faq}) but here I will
-% list all variables and \TikZ styles that are in use and can be changed to customize
-% \metrix easily.
+% list all variables and \TikZ/ styles that are in use and can be changed to customize
+% \metrix/ easily.
 % \subsection{Variables}
 % \begin{function}{\setmetrixvar,\usemetrixvar}
-% To customize the rendering of the symbols, accents and bow \metrix has some variables
+% To customize the rendering of the symbols, accents and bow \metrix/ has some variables
 % that you can change.
 % \begin{syntax}
 %    \cs{setmetrixvar}\Arg{variable}\Arg{value}
@@ -779,13 +822,19 @@
 % \metrics[5=my highlight]{_    u  u  _   _  _ }
 %                         {flos ve-te-ris vi-ni}
 % \end{example}
-% \begin{table}[p]
-%    \vspace*{-3\baselineskip}
-%    \centering
-%    \begin{tabu}to \textwidth {llX}
+%    \begin{longtabu}to \textwidth {ll>{\strut}X}
+%       \caption{Variables\label{tab:variables}}\\
 %       \toprule
 %       \rowfont{\bfseries\sffamily} variable & default & explanation \\
 %       \midrule
+%    \endfirsthead
+%       \rowfont{\bfseries\sffamily} variable & default & explanation \\
+%       \midrule
+%    \endhead
+%       \multicolumn{3}{r}{\dots}
+%    \endfoot
+%       \bottomrule
+%    \endlastfoot
 %       +symbollinewidth+ & +0.04em+ & line width of symbols above syllables and small stand alone symbols \\
 %       +bigsymbollinewidth+ & +0.06em+ & line width of big stand alone symbols \\
 %       +accentlinewidth+ & +0.03em+ & line width of accents (\cs{lng} and \cs{brv}) \\
@@ -819,34 +868,31 @@
 %                                 used in +filled highlight+ style \\
 %       +breakgap+ & +0.6em+ & gap before and after a (verse) break \\
 %       +emptywidth+ & +1em+ & gap replacing an empty symbol (abbreviation +e+) \\
-%       \bottomrule
-%    \end{tabu}
-%    \caption{Variables}\label{tab:variables}
-% \end{table}
+%    \end{longtabu}
 %
-% \subsection{\TikZ styles}\label{sec:styles}
-% Beside the variables you may change the \TikZ styles used by \metrix. But please mind
+% \subsection{\TikZ/ styles}\label{sec:styles}
+% Beside the variables you may change the \TikZ/ styles used by \metrix/. But please mind
 % that all styles are not empty by default so you should prefer +/.append style+ against
 % +/.style+. Otherwise it may cause strange effects. Remind that you can use \cs{usemetrixvar}
 % to access a variable.
-% \begin{variable}{every~metrix~symbol, every~metrix~big~symbol, every~metrix~symbol~node}
+% \begin{variable}{every metrix symbol, every metrix big symbol, every metrix symbol node}
 % These three styles define the apperance of the metric symbols. They define the line width,
 % the color, the basis vectors and other things.
 % \end{variable}
-% \begin{variable}{every~metrix~syllable~node,every~metrix~break~node}
+% \begin{variable}{every metrix syllable node,every metrix break node}
 % These styles defines the +node+s in which a syllable or a break symbol (the ones spanning across
 % the symbol and the syllable line) is typeset, e.g. it aligns these +node+s at their base line.
 % \end{variable}
-% \begin{variable}{every~metrix~accent}
+% \begin{variable}{every metrix accent}
 % This style defines the apperance of accents created by \cs{lng} and \cs{brv}.
 % \end{variable}
-% \begin{variable}{every~metrix~bow}
+% \begin{variable}{every metrix bow}
 % This style defines the apperance of bows below symbols.
 % \end{variable}
-% \begin{variable}{bold~highlight,colored~highlight,dashed~highlight,filled~highlight,superscript}
+% \begin{variable}{bold highlight,colored highlight,dashed highlight,filled highlight,superscript}
 % These styles can be used to highlight a certain symbol.
 % \end{variable}
-% \begin{variable}{every~superscript~picture,every~superscript~node,every~superscript~label}
+% \begin{variable}{every superscript picture,every superscript node,every superscript label}
 % These styles are used to define the +superscript+ highlighting style.
 % \end{variable}
 %
@@ -1085,6 +1131,12 @@
 \seq_new:N \l_@@_symbols_seq
 %    \end{macrocode}
 % \end{variable}
+% \begin{variable}[internal]{\l_@@_symbols_seq}
+%    This list stores the short breaks of \cs{metrics}.
+%    \begin{macrocode}
+\seq_new:N \l_@@_short_breaks_seq
+%    \end{macrocode}
+% \end{variable}
 % \begin{variable}[internal]{\l_@@_highlights_prop}
 %    This list stores the higlighting styles of \cs{metrics} and \cs{metricsymbols}.
 %    \begin{macrocode}
@@ -1133,7 +1185,8 @@
 %    \end{macrocode}
 %
 % \subsection{Internal main macros}
-% \begin{macro}[internal]{\@@_metrics:nn}
+% \begin{macro}[internal,updated=2014/07/02]{\@@_metrics:nn}
+% \changes{v1.1}{2014/07/02}{Made short breaks available}
 %    This macro processes the two lists of \cs{metrics} and combines the symbols
 %    and syllables.\footnote{The framing of this macro was provided by Enrico Gregorio at
 %    \url{http://tex.stackexchange.com/q/124528/4918}, a follow up question 
@@ -1154,9 +1207,22 @@
 %    \begin{macrocode}
   \seq_set_split:NnV \l_@@_syllables_seq { - } \l_@@_words_tl
 %    \end{macrocode}
-%    Split the symbol list at spaces
+%    Split the symbol list at spaces.
 %    \begin{macrocode}
   \seq_set_split:Nnx \l_@@_symbols_seq { ~ } { \tl_trim_spaces:n { #1 } }
+%    \end{macrocode}
+%    Search for the short breaks and remove them afterwards.
+%    \begin{macrocode}
+  \int_zero:N \l_@@_process_int
+  \seq_clear:N \l_@@_short_breaks_seq
+  \seq_map_inline:Nn \l_@@_symbols_seq {
+    \int_incr:N \l_@@_process_int
+    \tl_if_eq:nnT { ##1 } { ' } {
+    \seq_put_right:Nx \l_@@_short_breaks_seq { \int_use:N \l_@@_process_int }
+    \int_decr:N \l_@@_process_int
+  }
+  \seq_remove_all:Nn \l_@@_symbols_seq { ' }
+}
 %    \end{macrocode}
 %    Test whether both lists got the same length:
 %    \begin{macrocode}
@@ -1208,9 +1274,31 @@
          }
        }
      }
+%    \end{macrocode}
+%    And add the short break symbols if necessary:
+%    \begin{macrocode}
+     \seq_if_empty:NF \l_@@_short_breaks_seq {
+       \seq_map_inline:Nn \l_@@_short_breaks_seq {
+         \int_set:Nn \l_tmpa_int { ##1 - 1 }
+         \bool_if:nF {
+           \int_compare_p:n
+             { 0 = \l_tmpa_int }
+           ||
+           \int_compare_p:n
+             { \seq_count:N \l_@@_symbols_seq = \l_tmpa_int }
+         } {
+           \tikz [remember~picture, overlay] {
+             \node [every~metrix~symbol~node] at
+               ($(l_@@_symbol_node_\int_use:N \l_tmpa_int.east)!
+                0.5!(l_@@_symbol_node_##1.west)$)
+               { \@@_short_break: };
+           }
+         }
+       }
+     }
    }
 %    \end{macrocode}
-%    send an error, else.
+%    Send an error, else.
 %    \begin{macrocode}
    {
     \@@_error_msg:n
@@ -1226,8 +1314,9 @@
  }
 %    \end{macrocode}
 % \end{macro}
+%
 % \begin{macro}[internal]{\@@_metricsymbols:n}
-%    This macro works like \cs{\@@_metrics} but is used to print stand alone metric
+%    This macro works like \cs{\__metrix_metrics} but is used to print stand alone metric
 %    symbols via \cs{metricsymbols}.
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_metricsymbols:n #1
@@ -1243,10 +1332,22 @@
      }
     \str_case:nnn { ##1 } 
      {
-      { |  }
+      { ' }
        {
         \@@_break_gap:
         \@@_align_symbol:n { \@@_l_bigmark:  }
+        \@@_break_gap:
+       }
+      { | }
+       {
+        \@@_break_gap:
+        \@@_align_symbol:n { \@@_l_bigmark:  }
+        \@@_break_gap:
+       }
+      { '' }
+       {
+        \@@_break_gap:
+        \@@_align_symbol:n { \@@_ll_bigmark: }
         \@@_break_gap:
        }
       { || }
@@ -1263,7 +1364,8 @@
  }
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}[internal]{\@@_print_syllable:n}
+% \begin{macro}[internal,updated=2014/07/02]{\@@_print_syllable:n}
+% \changes{v1.1}{2014/07/02}{Symbol nodes get individual names now.}
 %    This macro combines a single syllable and the corrosponding metric symbol
 %    taken frome the symbol list index with the process counter.
 %    \begin{macrocode}
@@ -1274,7 +1376,8 @@
 %    Check wether the current syllable is short or long and set the corresponding bbol.
 %    \begin{macrocode}
    \hbox_set:Nn \l_@@_syllable_box { #1 }
-   \dim_compare:nTF { \box_wd:N \l_@@_syllable_box < \g_@@_variable_shortsyllablelimit_tl }
+   \dim_compare:nTF
+      { \box_wd:N \l_@@_syllable_box < \g_@@_variable_shortsyllablelimit_tl }
       { \bool_set_true:N \l_@@_short_syllable_bool }
       { \bool_set_false:N \l_@@_short_syllable_bool }
 %    \end{macrocode}
@@ -1288,16 +1391,19 @@
 %    Finally print the syllable and the symbol above. Use +{pgfinterruptboundingbox}+
 %    so that the symbol doesn't takes space ad doesn't cause gaps between the syllables.
 %    \begin{macrocode}
+   \hbox_set:Nn \l_tmpa_box { \@@_print_symbol: }
    \begin{tikzpicture}
     [
+     remember~picture,
      baseline=(l_@@_syllable_node.base),
     ]
     \node [every~metrix~syllable~node] (l_@@_syllable_node) {#1};
     \begin{pgfinterruptboundingbox}
      \node [every~metrix~symbol~node]
+      (l_@@_symbol_node_\int_use:N \l_@@_process_int)
       at ($(l_@@_syllable_node.base)+(0,\usemetrixvar{symbolshift})
       +(\tl_use:N \l_@@_internal_itcorrection_tl,0)$)
-      { \@@_print_symbol: };
+      { \box_use:N \l_tmpa_box };
     \end{pgfinterruptboundingbox}
    \end{tikzpicture}
   \group_end:
@@ -1629,7 +1735,8 @@
  }
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}[internal]{\@@_u__mark:}
+% \begin{macro}[internal,updated=2014/07/02]{\@@_u__mark:}
+% \changes{v1.1}{2014/07/02}{Removed red dot.}
 %    The indifferent symbol \MakePrivateLetters\metricsymbols*{u_}.
 %    \begin{macrocode}
 \cs_new:Npn \@@_u__mark:
@@ -1639,7 +1746,6 @@
    \draw ($(0,-0.2)+(-0.5\pgflinewidth,-\pgflinewidth)-(0,\usemetrixvar{gap})$) --
     ($(0.4,-0.2)+(0.5\pgflinewidth,-\pgflinewidth)
     +(0,-\usemetrixvar{gap})$);
-   \fill [red] circle (0.2pt);
   \end{tikzpicture}
  }
 %    \end{macrocode}
@@ -1703,33 +1809,45 @@
  }
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}[internal]{\@@_l_break}
+% \begin{macro}[internal,updated=2014/07/02]{\@@_l_break}
+% \changes{v1.1}{2014/07/02}{Made line slightly longer}
 %    The simple break symbol \metricsymbols*{|} (between syllables with symbols).
 %    \begin{macrocode}
 \cs_new:Npn \@@_l_break:
  {
   \begin{tikzpicture}[every~metrix~symbol,baseline=0.05em]
-   \draw [shorten~<=-0.2em] (0,\usemetrixvar{symbolshift})
-    -- (0,0) -- (0,0.8em) -- (0,\usemetrixvar{symbolshift});
+   \draw (0,\usemetrixvar{symbolshift}+0.325em)
+    -- (0,-0.05em) -- (0,0.8em) -- (0,\usemetrixvar{symbolshift});
   \end{tikzpicture}
  }
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}[internal]{\@@_ll_break}
+% \begin{macro}[internal,updated=2014/07/02]{\@@_ll_break}
+% \changes{v1.1}{2014/07/02}{Made lines slightly longer}
 %    The verse break symbol \metricsymbols*{||} (between syllables with symbols).
 %    \begin{macrocode}
 \cs_new:Npn \@@_ll_break:
  {
   \begin{tikzpicture}[every~metrix~symbol,baseline=0.05em]
-   \draw [shorten~<=-0.2em] (0,\usemetrixvar{symbolshift})
-    -- (0,0) -- (0,0.8em) -- (0,\usemetrixvar{symbolshift});
+   \draw (0,\usemetrixvar{symbolshift}+0.325em)
+    -- (0,-0.05em) -- (0,0.8em) -- (0,\usemetrixvar{symbolshift});
    \draw 
     [
      shift={($(\pgflinewidth,0)+(1.5*\usemetrixvar{gap},0)$)},
-     shorten~<=-0.2em,
     ]
-    (0,\usemetrixvar{symbolshift}) -- (0,0) -- (0,0.8em)
+    (0,\usemetrixvar{symbolshift}+0.325em) -- (0,-0.05em) -- (0,0.8em)
     -- (0,\usemetrixvar{symbolshift});
+  \end{tikzpicture}
+ }
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}[internal,added=2014/07/02]{\@@_short_break:}
+%    The shorter break symbol.
+%    \begin{macrocode}
+\cs_new:Npn \@@_short_break:
+ {
+  \begin{tikzpicture}[every~metrix~symbol]
+   \draw (0,0.3) -- (0,-0.3);
   \end{tikzpicture}
  }
 %    \end{macrocode}
@@ -1870,8 +1988,8 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \subsection{\TikZ styles}
-% The \metrix package uses several \TikZ sytles to draw the macros.
+% \subsection{\TikZ/ styles}
+% The \metrix/ package uses several \TikZ/ sytles to draw the macros.
 %    \begin{macrocode}
 \ExplSyntaxOff
 \tikzset {
@@ -1886,7 +2004,7 @@
   x=\usemetrixvar{bigbaseunit},y=\usemetrixvar{bigbaseunit},
  },
  every metrix symbol node/.style={
-  inner sep=0pt, anchor=center, 
+  inner sep=0pt, anchor=center,
  },
  every metrix break node/.style={
   inner sep=0pt, anchor=base, 
@@ -1971,7 +2089,7 @@
  }
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}[internal]{\@@_print_source:n}
+% \begin{macro}[internal]{\@@_print_vers_ref:n}
 % The internal macro to print the verse reference inside of +{metricvers}+
 %    \begin{macrocode}
 \cs_new:Npn \@@_print_vers_ref:n #1 
