@@ -1,0 +1,13 @@
+Name of your contribution:   metrix
+Version number:              1.1
+Author:                      Tobias Weh
+Your Name:                   
+Your email:                  mail@tweh.de
+Summary description:         Typeset metric marks for Latin text
+Suggested CTAN directory:    /macros/latex/contrib/metrix
+Type of Upload:              
+Changes:                     
+Administrative notes:        
+
+License Type:                LaTeX Project Public License (version 1.3)
+
