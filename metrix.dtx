@@ -27,8 +27,8 @@
 %<package>  }
 \def\metrixFileName{metrix}
 \def\metrixFileDescription{Typset prosody/metric symbols.}
-\def\metrixFileDate{2015/02/23}
-\def\metrixFileVersion{1.1}
+\def\metrixFileDate{2015/07/23}
+\def\metrixFileVersion{1.1a}
 %</driver|package>
 %<*driver>
 \documentclass[full,english]{l3doc}
@@ -107,7 +107,8 @@
 %
 % \title{The \metrix/ package}
 %
-% \author{Tobias Weh\thanks{URL: \url{http://www.tweh.de}, Mail: \mail{mail@tweh.de}}}
+% \author{Tobias Weh\thanks{URL: \url{http://tobiw.de/en}, Mail: \mail{mail@tobiw.de}}}
+% \changes{v1.1a}{2015/07/23}{New contact info (mail and URL).}
 %
 % \date{Version \metrixFileVersion\ -- Released \metrixFileDate}
 %
@@ -1257,6 +1258,7 @@
        {
 %    \end{macrocode}
 %    Finally typeset the syllable and it's symbol.
+% \changes{v1.1a}{2015/07/23}{Replaced deprecated \cs{str_case:nnn} with \cs{str_case:nnF}.}
 %    \begin{macrocode}
         \str_case:nnF { ##1 } 
          {
@@ -1318,6 +1320,7 @@
 % \begin{macro}[internal]{\@@_metricsymbols:n}
 %    This macro works like \cs{\__metrix_metrics} but is used to print stand alone metric
 %    symbols via \cs{metricsymbols}.
+% \changes{v1.1a}{2015/07/23}{Replaced deprecated \cs{str_case:nnn} with \cs{str_case:nnF}.}
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_metricsymbols:n #1
  {
