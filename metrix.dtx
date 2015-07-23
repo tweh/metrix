@@ -1258,7 +1258,7 @@
 %    \end{macrocode}
 %    Finally typeset the syllable and it's symbol.
 %    \begin{macrocode}
-        \str_case:nnn { ##1 } 
+        \str_case:nnF { ##1 } 
          {
           { | }
            {
@@ -1330,7 +1330,7 @@
      {
       \hspace{\usemetrixvar{symbolsep}}
      }
-    \str_case:nnn { ##1 } 
+    \str_case:nnF { ##1 } 
      {
       { ' }
        {
