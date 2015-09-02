@@ -451,6 +451,27 @@
 % \acct{ae}\enskip\textit{\acct{ae}}\enskip\textsl{\acct{ae}}\hfill\mbox{}}
 % \par\normalsize
 %
+% \subsubsection*{Fine Tuning}
+% To make some fine tuning for a certain accent possible the three macros actually got
+% some additional, \emph{optional} arguments:
+% {\par\medskip\noindent\ttfamily
+% \cs{brv}+(+\meta{coordinate}+)+\Arg{vowel}\\
+% \cs{lng}+(+\meta{coordinate}+)+\oarg{length}\Arg{vowel}\oarg{length}\\
+% \cs{acct}+(+\meta{coordinate}+)+\Arg{vowel}\par}
+%
+% \medskip
+% Where \meta{coordinate} must be a valid \TikZ/ coordinate and can be used to move
+% the accent. In addition to that the accent produced by \cs{lng} can be extended
+% with \meta{left/right length} by a certain amount.
+%
+% \begin{example}
+% Prevent collision between accent and descender of an \textit{f}.
+% \begin{verbatim}
+% \itshape somn\acct(-0.05em,-0.45ex){i}fero
+% \end{verbatim}
+% \itshape somn\acct(-0.05em,-0.45ex){i}fero
+% \end{example}
+%
 % \begin{function}[EXP]{\bow}
 %    \begin{syntax}
 %       \cs{bow}\Arg{syllables}
@@ -1910,66 +1931,76 @@
  }
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\lng}
-%    This macro prints the longa accent above it's argument.
+% \begin{macro}[updated=2015/09/02]{\lng}
+%    \changes{v1.2}{2015/09/02}{Finetunig for \protect\cs{lng}.}
+%    This macro prints the longa accent above its argument.
 %    \begin{macrocode}
-\NewDocumentCommand { \lng } { m }
+\NewDocumentCommand { \lng } { D(){0,0} O{0pt} m O{0pt} }
  {
   \begin{tikzpicture}[baseline=(l_@@_syllable_node.base),every~metrix~accent]
-   \node [every~metrix~syllable~node] (l_@@_syllable_node) {#1};
+   \node [every~metrix~syllable~node] (l_@@_syllable_node) {#3};
    \begin{pgfinterruptboundingbox}
-   \draw
-    ($(l_@@_syllable_node.north)
-    - (\usemetrixvar{lngminlength}/2,0)
-    +(\usemetrixvar{accentxshift},\usemetrixvar{lngshift})
-    + (\tl_use:N \l_@@_internal_itcorrection_tl,0)$)
-    --
-    ($(l_@@_syllable_node.north)
-    + (\usemetrixvar{lngminlength}/2,0)
-    +(\usemetrixvar{accentxshift},\usemetrixvar{lngshift})
-    + (\tl_use:N \l_@@_internal_itcorrection_tl,0)$)
-
-    ($(l_@@_syllable_node.north~west)
-    +(\usemetrixvar{lngshortening}+\usemetrixvar{accentxshift},\usemetrixvar{lngshift})
-    + (\tl_use:N \l_@@_internal_itcorrection_tl,0)$)
-    --
-    ($(l_@@_syllable_node.north~east)
-    +(-\usemetrixvar{lngshortening}+\usemetrixvar{accentxshift},\usemetrixvar{lngshift})
-    + (\tl_use:N \l_@@_internal_itcorrection_tl,0)$)
-   ;
+    \draw [shorten~< = -#2, shorten~> = -#4]
+     ($(l_@@_syllable_node.north)
+     - (\usemetrixvar{lngminlength}/2,0)
+     +(\usemetrixvar{accentxshift},\usemetrixvar{lngshift})
+     + (\tl_use:N \l_@@_internal_itcorrection_tl,0)
+     + (#1)$)
+     --
+     ($(l_@@_syllable_node.north)
+     + (\usemetrixvar{lngminlength}/2,0)
+     +(\usemetrixvar{accentxshift},\usemetrixvar{lngshift})
+     + (\tl_use:N \l_@@_internal_itcorrection_tl,0)
+     + (#1)$)
+    ;
+    \draw [shorten~< = -#2, shorten~> = -#4]
+     ($(l_@@_syllable_node.north~west)
+     +(\usemetrixvar{lngshortening}+\usemetrixvar{accentxshift},\usemetrixvar{lngshift})
+     + (\tl_use:N \l_@@_internal_itcorrection_tl,0)
+     + (#1)$)
+     --
+     ($(l_@@_syllable_node.north~east)
+     +(-\usemetrixvar{lngshortening}+\usemetrixvar{accentxshift},\usemetrixvar{lngshift})
+     + (\tl_use:N \l_@@_internal_itcorrection_tl,0)
+     + (#1)$)
+    ;
    \end{pgfinterruptboundingbox}
   \end{tikzpicture}%
  }
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\brv}
-%    This macro prints the brevis accent above it's argument.
+% \begin{macro}[updated=2015/09/02]{\brv}
+%    \changes{v1.2}{2015/09/02}{Finetunig for \protect\cs{brv}.}
+%    This macro prints the brevis accent above its argument.
 %    \begin{macrocode}
-\NewDocumentCommand { \brv } { m }
+\NewDocumentCommand { \brv } { D(){0,0} m }
  {
   \begin{tikzpicture}[baseline=(l_@@_syllable_node.base),every~metrix~accent]
-   \node [every~metrix~syllable~node] (l_@@_syllable_node) {#1};
+   \node [every~metrix~syllable~node] (l_@@_syllable_node) {#2};
    \begin{pgfinterruptboundingbox}
-   \draw ($(l_@@_syllable_node.north)+(-0.15,0)
-    + (\usemetrixvar{accentxshift},\usemetrixvar{brvshift})
-    + (\tl_use:N \l_@@_internal_itcorrection_tl,0)$)
-    arc [start~angle=0, end~angle=180, radius=-0.15];
+    \draw ($(l_@@_syllable_node.north)+(-0.15,0)
+     + (\usemetrixvar{accentxshift},\usemetrixvar{brvshift})
+     + (\tl_use:N \l_@@_internal_itcorrection_tl,0)
+     + (#1)$)
+     arc [start~angle=0, end~angle=180, radius=-0.15];
    \end{pgfinterruptboundingbox}
   \end{tikzpicture}
  }
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\brv}
-%    This macro prints the dot accent below it's argument.
+% \begin{macro}[updated=2015/09/02]{\acct}
+%    \changes{v1.2}{2015/09/02}{Finetunig for \protect\cs{acct}.}
+%    This macro prints the dot accent below its argument.
 %    \begin{macrocode}
-\NewDocumentCommand { \acct } { m }
+\NewDocumentCommand { \acct } { D(){0,0} m }
  {
   \begin{tikzpicture}[baseline=(l_@@_syllable_node.base),every~metrix~accent]
-   \node [every~metrix~syllable~node] (l_@@_syllable_node) {#1};
+   \node [every~metrix~syllable~node] (l_@@_syllable_node) {#2};
    \begin{pgfinterruptboundingbox}
-   \fill ($(l_@@_syllable_node.south)
-    + (0,\usemetrixvar{dotshift})$)
-    circle [radius=1.25\pgflinewidth];
+    \fill ($(l_@@_syllable_node.south)
+     + (0,\usemetrixvar{dotshift})
+     + (#1)$)
+     circle [radius=1.25\pgflinewidth];
    \end{pgfinterruptboundingbox}
   \end{tikzpicture}
  }
