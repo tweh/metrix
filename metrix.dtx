@@ -485,6 +485,23 @@
 %    mult\bow{um i}lle or d\bow{ei}nde
 % \end{example}
 %
+% \subsubsection*{Fine Tuning}
+% To make some fine tuning for a certain bow possible the macro actually has
+% some additional, \emph{optional} arguments:
+% {\par\medskip\noindent\ttfamily
+% \cs{bow}+(+\meta{coordinate}+)+\oarg{left length}\Arg{syllable}\oarg{right length}\par}
+%
+% \medskip
+% Where \meta{left/right length} can  be used to shorten the bow by a certain amount.
+%
+% \begin{example}
+% Prevent collision between accent and bow.
+% \begin{verbatim}
+% c\acct{oe}-l\bow{um \acct{e}}[2pt]st
+% \end{verbatim}
+% c\acct{oe}-l\bow{um \acct{e}}[2pt]st
+% \end{example}
+%
 % \section{Environments}
 % \begin{function}{symbolline}
 % This environment can be used to display a line of stand alone symbols.
@@ -2006,14 +2023,16 @@
  }
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}{\bow}
+% \begin{macro}[updated=2015/09/02]{\bow}
+%    \changes{v1.2}{2015/09/02}{Finetunig for \protect\cs{bow}.}
 %    This macro prints the bow below it's argument.
 %    \begin{macrocode}
-\NewDocumentCommand { \bow } { m }
+\NewDocumentCommand { \bow } { O{0pt} m O{0pt} }
  {
   \begin{tikzpicture}[baseline=(l_@@_syllable_node.base),every~metrix~bow]
-   \node [every~metrix~syllable~node] (l_@@_syllable_node) {#1};
-   \draw ($(l_@@_syllable_node.base~west)+
+   \node [every~metrix~syllable~node] (l_@@_syllable_node) {#2};
+   \draw [shorten~< = #1, shorten~> = #3]
+    ($(l_@@_syllable_node.base~west)+
     (\usemetrixvar{bowshortening},\usemetrixvar{bowshift})$)
     to [out=-45, in=225,looseness=\usemetrixvar{bowlooseness}] ($(l_@@_syllable_node.base~east)+
     (-\usemetrixvar{bowshortening},\usemetrixvar{bowshift})$);
