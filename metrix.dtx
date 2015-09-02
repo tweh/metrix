@@ -77,6 +77,9 @@
 	\MakeShortVerb{\+}
 }
 
+\makeatletter
+\def\meta@font@select{\itshape\rmfamily}
+\makeatother
 
 \IndexPrologue{
 	\section*{Index}
@@ -456,7 +459,7 @@
 % some additional, \emph{optional} arguments:
 % {\par\medskip\noindent\ttfamily
 % \cs{brv}+(+\meta{coordinate}+)+\Arg{vowel}\\
-% \cs{lng}+(+\meta{coordinate}+)+\oarg{length}\Arg{vowel}\oarg{length}\\
+% \cs{lng}+(+\meta{coordinate}+)+\oarg{left length}\Arg{vowel}\oarg{right length}\\
 % \cs{acct}+(+\meta{coordinate}+)+\Arg{vowel}\par}
 %
 % \medskip
