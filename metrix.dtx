@@ -12,8 +12,8 @@
 %<*driver|package>
 % The version of expl3 required is tested as early as possible, as
 % some really old versions do not define \ProvidesExplPackage.
-\RequirePackage{expl3}[2013/07/12]
-%<package>\@ifpackagelater{expl3}{2013/03/14}
+\RequirePackage{expl3}[2016/01/03]
+%<package>\@ifpackagelater{expl3}{2016/01/03}
 %<package>  {}
 %<package>  {%
 %<package>    \PackageError{metrix}{Support package l3kernel too old}
@@ -27,8 +27,8 @@
 %<package>  }
 \def\metrixFileName{metrix}
 \def\metrixFileDescription{Typset prosody/metric symbols.}
-\def\metrixFileDate{2015/09/02}
-\def\metrixFileVersion{1.2}
+\def\metrixFileDate{2016/01/21}
+\def\metrixFileVersion{1.2a}
 %</driver|package>
 %<*driver>
 \documentclass[full,english]{l3doc}
@@ -2196,5 +2196,6 @@
 % \PrintChanges^^A use makeindex -s gglo.ist -o metrix-doc.gls metrix-doc.glo
 %              ^^A use updated=YYYY-MM-DD or new=YYY-MM-DD in {documentation} section
 % \changes{v1.0}{2013/08/12}{Initial version}
+% \changes{v1.2a}{2016/01/21}{Replaced deprecated \cs{prop_get} variants (Thanks to J. Wright).}
 %
 % \PrintIndex^^A use: makeindex -s l3doc.ist -o metrix-doc.ind metrix-doc.idx 
