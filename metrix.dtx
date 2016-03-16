@@ -71,6 +71,8 @@
 \usepackage[scale=0.875]{tgheros}
 \usepackage{ascii}
 
+\edef\pluschar{+}
+
 \AtBeginDocument{
 	\DeleteShortVerb{\|}
 	\DeleteShortVerb{\"}
@@ -168,7 +170,7 @@
 % \url{https://github.com/tweh/metrix} to request features and report bugs or
 % send me an e-mail (\mail{mail@tobiw.de}).
 %
-% Please note that I don?t speak latin myself and fo that the examples in this manual
+% Please note that I don't speak latin myself and forthat the examples in this manual
 % may be wrong---as long as they show how to use the package I don't consider such
 % errors as bugs +;-)+.
 %
@@ -201,7 +203,9 @@
 %       +oo+ & two lowercase o's & \metricsymbols{oo} & aeolic base \\
 %       +|+ & pipe & \metricsymbols{|} & break (see \ref{sec:breaks}) \\
 %       +||+ & two pipes & \metricsymbols{||} & verse break (see \ref{sec:breaks}) \\
-%       +'+ & apostrophe & \metricsymbols{'} & shorter break (see \ref{sec:breaks}) \\
+%       +'+ & apostrophe (shift\,\pluschar\,\#) & \metricsymbols{'} &
+%          shorter break (see \ref{sec:breaks}) \\
+%       +,+ & comma & \metricsymbols{,} & shorter break (see \ref{sec:breaks}) \\
 %       \bottomrule
 %    \end{tabu}
 %   \end{table}
@@ -277,8 +281,8 @@
 %         {flos ve-te-ris vi-ni | meis na-ri-bus ob ||}
 % \end{example}
 % If you want the breaks to be shown in the symbol line only you can use the
-% shorter break which is represented by an apostrophe, i.e. +'+.
-% This mark must be used in \meta{symbols} only and is kind of special:
+% shorter break which is represented by an apostrophe (shift\,\pluschar\,\#)
+% or a comma. This mark must be used in \meta{symbols} only and is kind of special:
 % \begin{itemize}
 %    \item It \emph{can't} be highlighted and thus doesn't count for the numbers used
 %       for highlights,
@@ -293,6 +297,26 @@
 %   \end{verbatim}
 % \metrics{_  u  u ' _  u   u ' _  _ ' _  _   |  _  u   u  |  _ _   ||}
 %         {Ar-ma vi-rum-que ca-no Tro-iae qui | pri-mus ab |  o-ris ||}
+% \end{example}
+% The difference between +'+ and +,+ is that the break defined with an apostrophe
+% is vertically centred between the surrounding symbols while the break set with
+% the comma is vertically centred between the corresponding syllables. They both
+% align horizontally within the row of symbols.
+% \begin{example}
+%   \begin{verbatim}
+% \emph{apostrophe:}
+% \metrics{_  _  '   _          }
+%         {au-ra-{r\bow{um e}st}} \qquad
+% \emph{comma:}
+% \metrics{_  _  ,   _          }
+%         {au-ra-{r\bow{um e}st}}
+%   \end{verbatim}
+% \emph{apostrophe:}
+% \metrics{_  _  '   _          }
+%         {au-ra-{r\bow{um e}st}} \qquad
+% \emph{comma:}
+% \metrics{_  _  ,   _          }
+%         {au-ra-{r\bow{um e}st}}
 % \end{example}
 % 
 % \subsection{Highlight certain symbols/syllabels}
@@ -1173,10 +1197,11 @@
 \seq_new:N \l_@@_symbols_seq
 %    \end{macrocode}
 % \end{variable}
-% \begin{variable}[internal]{\l_@@_symbols_seq}
-%    This list stores the short breaks of \cs{metrics}.
+% \begin{variable}[internal]{\l_@@_short_breaks_seq,\l_@@_foot_breaks_seq}
+%    This list stores the short and foot breaks of \cs{metrics}.
 %    \begin{macrocode}
 \seq_new:N \l_@@_short_breaks_seq
+\seq_new:N \l_@@_foot_breaks_seq
 %    \end{macrocode}
 % \end{variable}
 % \begin{variable}[internal]{\l_@@_highlights_prop}
@@ -1229,6 +1254,7 @@
 % \subsection{Internal main macros}
 % \begin{macro}[internal,updated=2014/07/02]{\@@_metrics:nn}
 % \changes{v1.1}{2014/07/02}{Made short breaks available}
+% \changes{v1.3}{2016/03/16}{Extended short breaks feature}
 %    This macro processes the two lists of \cs{metrics} and combines the symbols
 %    and syllables.\footnote{The framing of this macro was provided by Enrico Gregorio at
 %    \url{http://tex.stackexchange.com/q/124528/4918}, a follow up question 
@@ -1253,18 +1279,24 @@
 %    \begin{macrocode}
   \seq_set_split:Nnx \l_@@_symbols_seq { ~ } { \tl_trim_spaces:n { #1 } }
 %    \end{macrocode}
-%    Search for the short breaks and remove them afterwards.
+%    Search for the short and foot breaks and remove them afterwards.
 %    \begin{macrocode}
   \int_zero:N \l_@@_process_int
   \seq_clear:N \l_@@_short_breaks_seq
+  \seq_clear:N \l_@@_foot_breaks_seq
   \seq_map_inline:Nn \l_@@_symbols_seq {
     \int_incr:N \l_@@_process_int
     \tl_if_eq:nnT { ##1 } { ' } {
-    \seq_put_right:Nx \l_@@_short_breaks_seq { \int_use:N \l_@@_process_int }
-    \int_decr:N \l_@@_process_int
+      \seq_put_right:Nx \l_@@_short_breaks_seq { \int_use:N \l_@@_process_int }
+      \int_decr:N \l_@@_process_int
+    }
+    \tl_if_eq:nnT { ##1 } { , } {
+      \seq_put_right:Nx \l_@@_foot_breaks_seq { \int_use:N \l_@@_process_int }
+      \int_decr:N \l_@@_process_int
+    }
   }
+  \seq_remove_all:Nn \l_@@_symbols_seq { , }
   \seq_remove_all:Nn \l_@@_symbols_seq { ' }
-}
 %    \end{macrocode}
 %    Test whether both lists got the same length:
 %    \begin{macrocode}
@@ -1339,6 +1371,31 @@
          }
        }
      }
+%    \end{macrocode}
+%    And add the foot break symbols if necessary:
+%    \begin{macrocode}
+     \seq_if_empty:NF \l_@@_foot_breaks_seq {
+       \seq_map_inline:Nn \l_@@_foot_breaks_seq {
+         \int_set:Nn \l_tmpa_int { ##1 - 1 }
+         \bool_if:nF {
+           \int_compare_p:n
+             { 0 = \l_tmpa_int }
+           ||
+           \int_compare_p:n
+             { \seq_count:N \l_@@_symbols_seq = \l_tmpa_int }
+         } {
+           \tikz [remember~picture, overlay] {
+             \coordinate (l_@@_tmp_coord) at
+               ($(l_@@_syllable_node_\int_use:N \l_tmpa_int.east)!
+                 0.5!(l_@@_syllable_node_##1.west)$);
+             \node [every~metrix~symbol~node] at
+               ($(l_@@_symbol_node_\int_use:N \l_tmpa_int.east)!
+                (l_@@_tmp_coord)!(l_@@_symbol_node_##1.west)$)
+               { \@@_foot_break: };
+           }
+         }
+       }
+     }
    }
 %    \end{macrocode}
 %    Send an error, else.
@@ -1376,6 +1433,12 @@
      }
     \str_case:nnF { ##1 } 
      {
+      { , }
+       {
+        \@@_break_gap:
+        \@@_align_symbol:n { \@@_l_bigmark:  }
+        \@@_break_gap:
+       }
       { ' }
        {
         \@@_break_gap:
@@ -1439,14 +1502,21 @@
    \begin{tikzpicture}
     [
      remember~picture,
-     baseline=(l_@@_syllable_node.base),
+     baseline=(l_@@_syllable_node_\int_use:N \l_@@_process_int.base),
     ]
-    \node [every~metrix~syllable~node] (l_@@_syllable_node) {#1};
+    \node [every~metrix~syllable~node]
+       (l_@@_syllable_node_\int_use:N \l_@@_process_int)
+       { #1 };
     \begin{pgfinterruptboundingbox}
      \node [every~metrix~symbol~node]
       (l_@@_symbol_node_\int_use:N \l_@@_process_int)
-      at ($(l_@@_syllable_node.base)+(0,\usemetrixvar{symbolshift})
-      +(\tl_use:N \l_@@_internal_itcorrection_tl,0)$)
+      at ($
+         (l_@@_syllable_node_\int_use:N \l_@@_process_int.base)
+         +
+         (0,\usemetrixvar{symbolshift})
+         +
+         (\tl_use:N \l_@@_internal_itcorrection_tl,0)
+      $)
       { \box_use:N \l_tmpa_box };
     \end{pgfinterruptboundingbox}
    \end{tikzpicture}
@@ -1885,7 +1955,7 @@
  }
 %    \end{macrocode}
 % \end{macro}
-% \begin{macro}[internal,added=2014/07/02]{\@@_short_break:}
+% \begin{macro}[internal]{\@@_short_break:}
 %    The shorter break symbol.
 %    \begin{macrocode}
 \cs_new:Npn \@@_short_break:
@@ -1894,6 +1964,13 @@
    \draw (0,0.3) -- (0,-0.3);
   \end{tikzpicture}
  }
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}[internal]{\@@_foot_break:}
+%    The shorter break symbol for foot breakt is the same as
+%    the regular short break.
+%    \begin{macrocode}
+\cs_set_eq:NN \@@_foot_break: \@@_short_break:
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1957,29 +2034,34 @@
 %    \begin{macrocode}
 \NewDocumentCommand { \lng } { D(){0,0} O{0pt} m O{0pt} }
  {
-  \begin{tikzpicture}[baseline=(l_@@_syllable_node.base),every~metrix~accent]
-   \node [every~metrix~syllable~node] (l_@@_syllable_node) {#3};
+  \begin{tikzpicture}[
+     baseline = (l_@@_syllable_node_\int_use:N \l_@@_process_int.base),
+     every~metrix~accent
+  ]
+   \node [every~metrix~syllable~node]
+      (l_@@_syllable_node_\int_use:N \l_@@_process_int)
+      { #3 };
    \begin{pgfinterruptboundingbox}
     \draw [shorten~< = -#2, shorten~> = -#4]
-     ($(l_@@_syllable_node.north)
+     ($(l_@@_syllable_node_\int_use:N \l_@@_process_int.north)
      - (\usemetrixvar{lngminlength}/2,0)
      +(\usemetrixvar{accentxshift},\usemetrixvar{lngshift})
      + (\tl_use:N \l_@@_internal_itcorrection_tl,0)
      + (#1)$)
      --
-     ($(l_@@_syllable_node.north)
+     ($(l_@@_syllable_node_\int_use:N \l_@@_process_int.north)
      + (\usemetrixvar{lngminlength}/2,0)
      +(\usemetrixvar{accentxshift},\usemetrixvar{lngshift})
      + (\tl_use:N \l_@@_internal_itcorrection_tl,0)
      + (#1)$)
     ;
     \draw [shorten~< = -#2, shorten~> = -#4]
-     ($(l_@@_syllable_node.north~west)
+     ($(l_@@_syllable_node_\int_use:N \l_@@_process_int.north~west)
      +(\usemetrixvar{lngshortening}+\usemetrixvar{accentxshift},\usemetrixvar{lngshift})
      + (\tl_use:N \l_@@_internal_itcorrection_tl,0)
      + (#1)$)
      --
-     ($(l_@@_syllable_node.north~east)
+     ($(l_@@_syllable_node_\int_use:N \l_@@_process_int.north~east)
      +(-\usemetrixvar{lngshortening}+\usemetrixvar{accentxshift},\usemetrixvar{lngshift})
      + (\tl_use:N \l_@@_internal_itcorrection_tl,0)
      + (#1)$)
@@ -1995,10 +2077,16 @@
 %    \begin{macrocode}
 \NewDocumentCommand { \brv } { D(){0,0} m }
  {
-  \begin{tikzpicture}[baseline=(l_@@_syllable_node.base),every~metrix~accent]
-   \node [every~metrix~syllable~node] (l_@@_syllable_node) {#2};
+  \begin{tikzpicture}[
+     baseline = (l_@@_syllable_node_\int_use:N \l_@@_process_int.base),
+     every~metrix~accent
+  ]
+   \node [every~metrix~syllable~node]
+      (l_@@_syllable_node_\int_use:N \l_@@_process_int)
+      { #2 };
    \begin{pgfinterruptboundingbox}
-    \draw ($(l_@@_syllable_node.north)+(-0.15,0)
+    \draw ($(l_@@_syllable_node_\int_use:N \l_@@_process_int.north)
+     + (-0.15,0)
      + (\usemetrixvar{accentxshift},\usemetrixvar{brvshift})
      + (\tl_use:N \l_@@_internal_itcorrection_tl,0)
      + (#1)$)
@@ -2014,10 +2102,15 @@
 %    \begin{macrocode}
 \NewDocumentCommand { \acct } { D(){0,0} m }
  {
-  \begin{tikzpicture}[baseline=(l_@@_syllable_node.base),every~metrix~accent]
-   \node [every~metrix~syllable~node] (l_@@_syllable_node) {#2};
+  \begin{tikzpicture}[
+     baseline = (l_@@_syllable_node_\int_use:N \l_@@_process_int.base),
+     every~metrix~accent
+   ]
+   \node [every~metrix~syllable~node]
+      (l_@@_syllable_node_\int_use:N \l_@@_process_int)
+      { #2 };
    \begin{pgfinterruptboundingbox}
-    \fill ($(l_@@_syllable_node.south)
+    \fill ($(l_@@_syllable_node_\int_use:N \l_@@_process_int.south)
      + (0,\usemetrixvar{dotshift})
      + (#1)$)
      circle [radius=1.25\pgflinewidth];
@@ -2032,12 +2125,18 @@
 %    \begin{macrocode}
 \NewDocumentCommand { \bow } { O{0pt} m O{0pt} }
  {
-  \begin{tikzpicture}[baseline=(l_@@_syllable_node.base),every~metrix~bow]
-   \node [every~metrix~syllable~node] (l_@@_syllable_node) {#2};
+  \begin{tikzpicture}[
+    baseline = (l_@@_syllable_node_\int_use:N \l_@@_process_int.base),
+    every~metrix~bow
+  ]
+   \node [every~metrix~syllable~node]
+      (l_@@_syllable_node_\int_use:N \l_@@_process_int)
+      { #2 };
    \draw [shorten~< = #1, shorten~> = #3]
-    ($(l_@@_syllable_node.base~west)+
+    ($(l_@@_syllable_node_\int_use:N \l_@@_process_int.base~west)+
     (\usemetrixvar{bowshortening},\usemetrixvar{bowshift})$)
-    to [out=-45, in=225,looseness=\usemetrixvar{bowlooseness}] ($(l_@@_syllable_node.base~east)+
+    to [out=-45, in=225,looseness=\usemetrixvar{bowlooseness}]
+    ($(l_@@_syllable_node_\int_use:N \l_@@_process_int.base~east)+
     (-\usemetrixvar{bowshortening},\usemetrixvar{bowshift})$);
   \end{tikzpicture}
  }
