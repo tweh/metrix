@@ -132,6 +132,7 @@
 %\metricsymbols{,}
 
 
+
 \bigskip
 \metrics{ _    u  u , _  _  ,   _           _ , _  u  u ,  _   u  u , _  _ }
         {quod fa-cit au-ra-{r\bow{um e}st} et cus-pi-de  ful-get  a-cu-ta}
@@ -140,11 +141,23 @@
 \newcommand{\fakesep}{
 \raisebox{.83em}{{\rule{.04em}{6.47pt}}}\hspace{-3.6pt}
 }
-\metrics{ _    u  u ' _  _    _           _ ' _  u  u '  _   u  u ' _  _ }
+\metrics{ _   u  u ' _  _    _           _ ' _  u  u '  _   u  u ' _  _ }
         {quod fa-cit au-ra-\fakesep{r\bow{um e}st} et cus-pi-de  ful-get  a-cu-ta}
 
 \bigskip
 \metricsymbols{ _    u  u , _  _    _           _ ' _  u  u '  _   u  u ' _  _ }
+
+
+\vspace{25mm}
+
+\setmetrixvar{arrow}{.}
+
+\metrics[
+   1=add arrow,
+   2=add arrow,
+   6={add text=some text}
+]{ u_uu _ _ e e u }{a-e-i o-u j}
+
 
 %
 %

@@ -331,6 +331,23 @@
 % \metrix/ comes with several predefined highlighting styles:
 % \DeleteShortVerb{\+}
 % \begin{itemize}
+%    \item \textbf{\texttt{add arrow}}\\[2ex]
+%       \metrics[3+8={add arrow}]{_    u  u  _   _  _  | _    _  u  u   _  ||}
+%       {flos ve-te-ris vi-ni | meis na-ri-bus ob ||}\hfill
+%       \metricsymbols[2={add arrow}]{u u_uu x _ | u _ n ||}
+%
+%       This style adds an arrow above the metric symbol. To change the arrow symbol, edit
+%       the variable \verb+metrix+.
+%
+%    \item \textbf{\texttt{add text}=}\meta{text}\\[2ex]
+%       \metrics[3+8={add text=shout!}]{_    u  u  _   _  _  | _    _  u  u   _  ||}
+%       {flos ve-te-ris vi-ni | meis na-ri-bus ob ||}\hfill
+%       \metricsymbols[2={add text=whisper}]{u u_uu x _ | u _ n ||}
+%
+%       This style takes a \emph{mandatory} argument to add some text above a symbol.
+%       To change the default font change the font of the \TikZ/ node style
+%       \verb|every metrix added text|.
+%
 %    \item \textbf{\texttt{bold highlight}}\\[2ex]
 %       \metrics[2+5+9+13={bold highlight}]{_    u  u  _   _  _  | _    _  u  u   _  ||}
 %        {flos ve-te-ris vi-ni | meis na-ri-bus ob ||}\hfill
@@ -934,6 +951,7 @@
 %                                 used in +colored highlight+ style \\
 %       +fillcolor+ & +yellow+ & color of filled symbol +node+s
 %                                 used in +filled highlight+ style \\
+%       +arrow+ & +\$+\cs{downarrow}+\$+ & arrow for highlighting \\
 %       +breakgap+ & +0.6em+ & gap before and after a (verse) break \\
 %       +emptywidth+ & +1em+ & gap replacing an empty symbol (abbreviation +e+) \\
 %    \end{longtabu}
@@ -962,6 +980,9 @@
 % \end{variable}
 % \begin{variable}{every superscript picture,every superscript node,every superscript label}
 % These styles are used to define the +superscript+ highlighting style.
+% \end{variable}
+% \begin{variable}{every metrix added text}
+% This style is used for text added to a symbol with the +add text+ highlighting.
 % \end{variable}
 %
 % \end{documentation}
@@ -1165,6 +1186,15 @@
 %    \begin{macrocode}
 \tl_new:N \g_@@_variable_fillcolor_tl
 \tl_set:Nn \g_@@_variable_fillcolor_tl { yellow }
+%    \end{macrocode}
+% \end{variable}
+% \begin{variable}[internal]
+%  {\g_@@_variable_arrow_tl}
+% \changes{v1.3}{2016/03/21}{New variable for arrow}
+%    These variable stores the color used in the +filled highlight+ style.
+%    \begin{macrocode}
+\tl_new:N \g_@@_variable_arrow_tl
+\tl_set:Nn \g_@@_variable_arrow_tl { $\downarrow$ }
 %    \end{macrocode}
 % \end{variable}
 % \begin{variable}[internal]{\g_@@_variable_breakgap_tl}
@@ -1632,7 +1662,7 @@
 %    \end{macrocode}
 % \end{macro}
 % \begin{macro}[internal]{\@@_evaluate_higlights:N}
-%    This macro typsets the gap around the two break symbols.
+%    This macro evaluates and prints the highlighting options.
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_evaluate_higlights:n #1
  {
@@ -2227,6 +2257,20 @@
   },
  },
  superscript/.value required,
+ add arrow/.style={
+  every metrix symbol node/.append style={
+   label=90:\usemetrixvar{arrow},
+  },
+ },
+ add text/.style={
+  every metrix symbol node/.append style={
+   label={[every metrix added text]#1},
+  },
+ },
+ every metrix added text/.style = {
+  font = \scriptsize\itshape,
+ },
+ add text/.value required,
 }
 \ExplSyntaxOn
 %    \end{macrocode}
@@ -2298,5 +2342,6 @@
 %              ^^A use updated=YYYY-MM-DD or new=YYY-MM-DD in {documentation} section
 % \changes{v1.0}{2013/08/12}{Initial version}
 % \changes{v1.2a}{2016/01/21}{Replaced deprecated \cs{prop_get} variants (Thanks to J. Wright).}
+% \changes{v1.3}{2016/03/21}{New highlight styles: \texttt{add text} and \texttt{add arrow}}
 %
 % \PrintIndex^^A use: makeindex -s l3doc.ist -o metrix-doc.ind metrix-doc.idx 
