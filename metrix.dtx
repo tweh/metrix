@@ -944,9 +944,9 @@
 %       +bowshift+ & +-0.15em+ & length to shift the bow below the base line \\
 %       +bowshortening+ & +0.15em+ & length to shrink the bow a little \\
 %       +bowlooseness+ & +0.75+ & value to influence the bending of the bow \\
-%       +symbolcolor+ & +black+ & color of metric symbols \\
-%       +accentcolor+ & +black+ & color of accents (\cs{lng} and \cs{brv}) \\
-%       +bowcolor+ & +black+ & color of bows (\cs{bow}) \\
+%       +symbolcolor+ & +.+ (curr. color) & color of metric symbols \\
+%       +accentcolor+ & +.+ (curr. color) & color of accents (\cs{lng} and \cs{brv}) \\
+%       +bowcolor+ & +.+ (curr. color) & color of bows (\cs{bow}) \\
 %       +highlightcolor+ & +red+ & color of highlighted symbols and syllabels
 %                                 used in +colored highlight+ style \\
 %       +fillcolor+ & +yellow+ & color of filled symbol +node+s
@@ -1162,14 +1162,15 @@
 % \end{variable}
 % \begin{variable}[internal]
 %  {\g_@@_variable_symbolcolor_tl,\g_@@_variable_accentcolor_tl,g_@@_variable_bowcolor_tl}
+% \changes{v1.4}{2016/03/29}{Changed symbol and accent color to current color.}
 %    These variables store the color of symbols, accents and bows.
 %    \begin{macrocode}
 \tl_new:N \g_@@_variable_symbolcolor_tl
-\tl_set:Nn \g_@@_variable_symbolcolor_tl { black }
+\tl_set:Nn \g_@@_variable_symbolcolor_tl { . }
 \tl_new:N \g_@@_variable_accentcolor_tl
-\tl_set:Nn \g_@@_variable_accentcolor_tl { black }
+\tl_set:Nn \g_@@_variable_accentcolor_tl { . }
 \tl_new:N \g_@@_variable_bowcolor_tl
-\tl_set:Nn \g_@@_variable_bowcolor_tl { black }
+\tl_set:Nn \g_@@_variable_bowcolor_tl { . }
 %    \end{macrocode}
 % \end{variable}
 % \begin{variable}[internal]
