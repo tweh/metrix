@@ -71,6 +71,14 @@
 \usepackage[scale=0.875]{tgheros}
 \usepackage{ascii}
 
+\usepackage{upquote}
+   % add \@noligs to the redefinitions made by doc.sty to make upquote work
+   \makeatother
+   \patchcmd{\verb}{\ttfamily}{\ttfamily\@noligs}{}{}
+   \patchcmd{\verbatim}{\frenchspacing}{\frenchspacing\@noligs}{}{}
+   \patchcmd{\macrocode}{\frenchspacing}{\frenchspacing\@noligs}{}{}
+   \makeatother
+
 \edef\pluschar{+}
 
 \AtBeginDocument{
