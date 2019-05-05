@@ -1,16 +1,38 @@
 Name of your contribution:   metrix
-Version number:              1.3
-Author:                      Tobias Weh
-Your Name:                   
+
+Version number:              1.4
+
+Maintainer:                  Tobias Weh
+
+Your Name:                   Tobias Weh
+
 Your email:                  mail@tobiw.de (*)
-Summary description:         Typeset metric marks for Latin text
+
+Confirmation:                [yes]
+
+Summary:                     Typeset metric marks for Latin text
+
+Description:
+The metrix package can be used to print the prosodics/metrics of (latin) verses. It provides macros to typeset the symbols stand alone and in combination with syllables (including automatic alignment). Furthermore it defines a new brevis and a longa accent as well as a bow to contract syllables.
+
 Suggested CTAN directory:    /macros/latex/contrib/metrix
-Type of Upload:              
-Changes:                     
-Administrative notes:        
+
+Announcement …:              [as needed]
+
+Administrative notes:        [as needed]   
 
 License Type:                LaTeX Project Public License (version 1.3)
 
+Archive file:                [current .tar.gz file]
 
-(*) Am 23.7.15 beim Upload von metrix v1.1a um Änderung in mail@tobiw.de
-    bei allen Paketen gebeten.
+Home page:                   
+
+Bug tracker:                 https://github.com/tweh/metrix/issues
+
+Support:
+
+Announcements:
+
+Repository:                  https://github.com/tweh/metrix
+
+Developers:
