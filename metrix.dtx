@@ -27,8 +27,8 @@
 %<package>  }
 \def\metrixFileName{metrix}
 \def\metrixFileDescription{Typset prosody/metric symbols.}
-\def\metrixFileDate{2019/05/05}
-\def\metrixFileVersion{1.5}
+\def\metrixFileDate{2019/05/13}
+\def\metrixFileVersion{1.4a}
 %</driver|package>
 %<*driver>
 \documentclass[full,english]{l3doc}
@@ -193,8 +193,16 @@
 % correct input is \verb*|_ ' x| (where \verb*| | indicates a space/blank).
 % \subsubsection*{Accents above symbols (ictus)}
 % If you want to add an additional accent above a symbol you may precede the symbol with
-% an acute +´+ or grave +`+. At the moment this only works with breve (+´u+ or +`u+)
-% and longum (+´_+ or +`_+).
+% an slash +/+ for an acute or a star +*+ for a grave accent. At the moment this only works
+% with breve (+/u+ or +*u+) and longum (+/_+ or +*_+).
+% \begin{example}
+% An ictus (although out of date).
+%   \begin{verbatim}
+% \metricsymbols{/_ u u /_ _ /_}
+%   \end{verbatim}
+%   \metricsymbols{/_ u u /_ _ /_}
+% \end{example}
+%\pagebreak
 % \begin{longtabu}to \textwidth {l>{\itshape}lcXl}
 %    \caption{Symbol abbreviations\label{tab:symbols}}\\
 %    \toprule
@@ -983,8 +991,8 @@
 %       +arrow+ & +\$+\cs{downarrow}+\$+ & arrow for highlighting \\
 %       +breakgap+ & +0.6em+ & gap before and after a (verse) break \\
 %       +emptywidth+ & +1em+ & gap replacing an empty symbol (abbreviation +e+) \\
-%       +acute+ & +´+ & acute accent character/symbol \\
-%       +grave+ & +\`{}+ & grave accent character/symbol \\
+%       +acute+ & +\string\textasciiacute+ & acute accent character/symbol \\
+%       +grave+ & +\string\textasciigrave+ & grave accent character/symbol \\
 %    \end{longtabu}
 %
 % \subsection{\TikZ/ styles}\label{sec:styles}
@@ -999,6 +1007,9 @@
 % \begin{variable}{every metrix syllable node,every metrix break node}
 % These styles defines the +node+s in which a syllable or a break symbol (the ones spanning across
 % the symbol and the syllable line) is typeset, e.g. it aligns these +node+s at their base line.
+% \end{variable}
+% \begin{variable}{every metrix ictus node}
+% This style defines the apperance of accents above symbols (ictus, e.g. +/u+).
 % \end{variable}
 % \begin{variable}{every metrix accent}
 % This style defines the apperance of accents created by \cs{lng} and \cs{brv}.
@@ -1043,6 +1054,7 @@
 \ExplSyntaxOff
  \usetikzlibrary{calc}
 \ExplSyntaxOn
+\RequirePackage{textcomp}
 %    \end{macrocode}
 %
 % \subsection{Constants and internal variables}
@@ -1051,13 +1063,13 @@
 % \begin{variable}[internal]{\c_@@_acute_accent_tl}
 %    Constant holding an acute accent char.
 %    \begin{macrocode}
-\tl_const:Nn \c_@@_acute_accent_tl { ´ }
+\tl_const:Nn \c_@@_acute_accent_tl { / }
 %    \end{macrocode}
 % \end{variable}
 % \begin{variable}[internal]{\c_@@_acute_accent_tl}
 %    Constant holding an grave accent char.
 %    \begin{macrocode}
-\tl_const:Nn \c_@@_grave_accent_tl { ` }
+\tl_const:Nn \c_@@_grave_accent_tl { * }
 %    \end{macrocode}
 % \end{variable}
 % \subsubsection{Variables}
@@ -1350,14 +1362,14 @@
 %    This variable stores acute symbol.
 %    \begin{macrocode}
 \tl_new:N \g_@@_variable_acute_tl
-\tl_set:Nn \g_@@_variable_acute_tl { ´ }
+\tl_set:Nn \g_@@_variable_acute_tl { \textasciiacute }
 %    \end{macrocode}
 % \end{variable}
 % \begin{variable}[internal]{\g_@@_variable_grave_tl}
 %    This variable stores grave symbol.
 %    \begin{macrocode}
 \tl_new:N \g_@@_variable_grave_tl
-\tl_set:Nn \g_@@_variable_grave_tl { \`{} }
+\tl_set:Nn \g_@@_variable_grave_tl { \textasciigrave }
 %    \end{macrocode}
 % \end{variable}
 %
@@ -1549,7 +1561,7 @@
     \int_incr:N \l_@@_process_int
     \int_compare:nT { \l_@@_process_int > 1 }
      {
-      \hspace{\usemetrixvar{symbolsep}}
+      \hspace { \usemetrixvar{symbolsep} }
      }
     \str_case:nnF { ##1 } 
      {
@@ -1728,7 +1740,7 @@
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_break_gap: 
  {
-  \hspace{\usemetrixvar{breakgap}}
+  \hspace { \usemetrixvar { breakgap } }
  }
 %    \end{macrocode}
 % \end{macro}
@@ -1754,7 +1766,7 @@
 %    \begin{macrocode}
 \cs_new_protected:Npn \@@_e_gap: 
  {
-  \hspace*{\usemetrixvar{emptywidth}}
+  \hspace* { \usemetrixvar { emptywidth } }
  }
 %    \end{macrocode}
 % \end{macro}
@@ -1869,11 +1881,11 @@
    \draw (0,0) arc [start~angle=0, end~angle=180, radius=-0.225];
    \bool_if:NT \l_@@_has_acute_accent_bool
     {
-     \node at (0.225,0) {\usemetrixvar{acute}};
+     \node [every~metrix~ictus~node] at (0.225,0) { \usemetrixvar { acute } };
     }
    \bool_if:NT \l_@@_has_grave_accent_bool
     {
-     \node at (0.225,0) {\usemetrixvar{grave}};
+     \node [every~metrix~ictus~node] at (0.225,0) { \usemetrixvar { grave } };
     }
   \end{tikzpicture}
  }
@@ -1890,11 +1902,11 @@
      \draw (0,0) -- ++(0.4,0);
      \bool_if:NT \l_@@_has_acute_accent_bool
       {
-       \node at (0.2,0) {\usemetrixvar{acute}};
+       \node [every~metrix~ictus~node] at (0.2,0) { \usemetrixvar { acute } };
       }
      \bool_if:NT \l_@@_has_grave_accent_bool
       {
-       \node at (0.2,0) {\usemetrixvar{grave}};
+       \node [every~metrix~ictus~node] at (0.2,0) { \usemetrixvar { grave } };
       }
     \end{tikzpicture}
    }
@@ -1903,11 +1915,11 @@
      \draw (0,0) -- ++(0.75,0);
      \bool_if:NT \l_@@_has_acute_accent_bool
       {
-       \node at (0.375,0) {\usemetrixvar{acute}};
+       \node [every~metrix~ictus~node] at (0.375,0) { \usemetrixvar { acute } };
       }
      \bool_if:NT \l_@@_has_grave_accent_bool
       {
-       \node at (0.375,0) {\usemetrixvar{grave}};
+       \node [every~metrix~ictus~node] at (0.375,0) { \usemetrixvar { grave } };
       }
     \end{tikzpicture}
    }
@@ -2374,6 +2386,9 @@
  every metrix symbol node/.style={
   inner sep=0pt, anchor=center,
  },
+ every metrix ictus node/.style={
+   overlay,
+ },
  every metrix break node/.style={
   inner sep=0pt, anchor=base, 
  },
@@ -2490,25 +2505,25 @@
    \string\verseref\space can~only~be~used~in~{metricverses}~env.
   }
  }
-\NewDocumentEnvironment{metricverses} { }
+\NewDocumentEnvironment { metricverses } { }
  {
   \RenewDocumentCommand { \verseref } { m }
    {
     \@@_print_vers_ref:n { ##1 }
    }
   \par
-  \addvspace{0.7\baselineskip}
-  \fp_compare:nT { \usemetrixvar{symbolshift} < 0.0 }
+  \addvspace { 0.7\baselineskip }
+  \fp_compare:nT { \usemetrixvar { symbolshift } < 0.0 }
    {
-    \vspace{\usemetrixvar{symbolshift}}
+    \vspace { \usemetrixvar { symbolshift } }
    }
-  \addtolength{\baselineskip}{0.6\baselineskip}
+  \addtolength { \baselineskip } { 0.6\baselineskip }
  }
  {
   \par
-  \addtolength{\baselineskip}{-0.6\baselineskip}
-  \vspace{\baselineskip}
-  \noindent\ignorespacesafterend
+  \addtolength { \baselineskip } { -0.6\baselineskip }
+  \vspace { \baselineskip }
+  \noindent \ignorespacesafterend
  }
 %    \end{macrocode}
 % \end{macro}
@@ -2526,5 +2541,8 @@
 % \changes{v1.3}{2016/03/21}{New highlight styles: \texttt{add text} and \texttt{add arrow}.}
 % \changes{v1.4}{2019/05/04}{Added docs for \texttt{l} and \texttt{ll} symbol.}
 % \changes{v1.4}{2019/05/05}{Added possibility to add accents/icutus above symbols.}
+% \changes{v1.4a}{2019/05/13}{Now loads \pkg{textcomp}.}
+% \changes{v1.4a}{2019/05/13}{Fix: Icuts/accents didn't work with unicode.}
+% \changes{v1.4a}{2019/05/13}{New style: \texttt{every metrix ictus node}}
 %
 % \PrintIndex^^A use: makeindex -s l3doc.ist -o metrix-doc.ind metrix-doc.idx 
