@@ -228,6 +228,7 @@
 %    +x+ && \metricsymbols{x} & elementum anceps & \\
 %    +n+ && \metricsymbols{n} & elementum indifferens & \\
 %    +u_+ && \metricsymbols{u_} & elementum indifferens & \\
+%    +_u+ && \metricsymbols{_u} & elementum indifferens & \\
 %    +A+ && \metricsymbols{A} & * & \\
 %    +v+ && \metricsymbols{v} & * & \\
 %    +o+ && \metricsymbols{o} & * & \\
@@ -2061,6 +2062,21 @@
    \draw ($(0,-0.2)+(-0.5\pgflinewidth,-\pgflinewidth)-(0,\usemetrixvar{gap})$) --
     ($(0.4,-0.2)+(0.5\pgflinewidth,-\pgflinewidth)
     +(0,-\usemetrixvar{gap})$);
+  \end{tikzpicture}
+ }
+%    \end{macrocode}
+% \end{macro}
+% \begin{macro}[internal,added=2019/10/09]{\@@__u_mark:}
+% \changes{v1.5}{2019/10/09}{Added.}
+%    The indifferent symbol \MakePrivateLetters\metricsymbols*{_u}.
+%    \begin{macrocode}
+\cs_new:Npn \@@__u_mark:
+ {
+  \begin{tikzpicture}[every~metrix~symbol]
+   \draw (0,0) arc [start~angle=0, end~angle=180, radius=-0.2];
+   \draw ($(0,0)+(-0.5\pgflinewidth,0.5\pgflinewidth)+(0,\usemetrixvar{gap})$) --
+    ($(0.4,0)+(0.5\pgflinewidth,0.5\pgflinewidth)
+    +(0,\usemetrixvar{gap})$);
   \end{tikzpicture}
  }
 %    \end{macrocode}
